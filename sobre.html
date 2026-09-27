@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre o projeto — Coleta Itapuã</title>
+  <meta name="description" content="Projeto de extensão para informatização e gestão do cronograma de coleta de resíduos sólidos de Itapuã do Oeste/RO: objetivos, justificativa e metodologia.">
+  <link rel="icon" href="img/icone.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/sobre.css">
+  <script type="module" src="js/paginas/sobre.js"></script>
+</head>
+<body>
+
+<header class="topo">
+  <div class="container">
+    <a href="index.html" class="marca">
+      <img src="img/icone.svg" width="36" height="36" alt="">
+      <span>Coleta Itapuã<small>Itapuã do Oeste / RO</small></span>
+    </a>
+    <button class="btn-menu" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menuPrincipal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <nav class="menu" id="menuPrincipal">
+      <ul>
+        <li><a href="index.html#consulta">Consultar coleta</a></li>
+        <li><a href="index.html#calendario">Calendário</a></li>
+        <li><a href="index.html#avisos">Avisos</a></li>
+        <li><a href="sobre.html" class="ativo" aria-current="page">O projeto</a></li>
+        <li><a href="admin.html">Área administrativa</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="aviso-carregamento container" data-aviso-carregamento>
+  Se esta mensagem não desaparecer, abra o site por um servidor local (veja o arquivo README.md).
+</div>
+
+<main class="bloco">
+  <div class="container">
+    <h1>Sobre o projeto de extensão</h1>
+    <p class="subtitulo">Informatização e gestão do cronograma de coleta de resíduos sólidos de Itapuã do Oeste/RO.</p>
+
+    <div class="grid grid-2">
+      <section class="card">
+        <h2>Objetivo geral</h2>
+        <p>Desenvolver um sistema web para informatização e gestão do cronograma de coleta de resíduos sólidos do município de Itapuã do Oeste/RO, contemplando o cadastro de setores, rotas e dias de coleta, a consulta pública do calendário por bairro/endereço e o envio de avisos à população.</p>
+      </section>
+      <section class="card">
+        <h2>Objetivos específicos</h2>
+        <ul class="lista">
+          <li>Mapear, junto à Prefeitura, os setores, bairros e rotas atendidos pela coleta.</li>
+          <li>Cadastrar rotas, logradouros, veículos e responsáveis de cada setor.</li>
+          <li>Organizar os dias e horários de coleta por tipo de resíduo.</li>
+          <li>Disponibilizar consulta pública por bairro ou endereço.</li>
+          <li>Publicar avisos sobre alterações, feriados e campanhas educativas.</li>
+        </ul>
+      </section>
+      <section class="card">
+        <h2>Justificativa e público-alvo</h2>
+        <p>A falta de informação sobre os dias de coleta faz com que o lixo fique exposto nas calçadas por mais tempo, atraindo animais e vetores de doenças. Com o calendário acessível pelo celular, os moradores sabem quando colocar os resíduos para fora, e a gestão municipal passa a ter o cronograma organizado em um só lugar.</p>
+        <p><strong>Público-alvo:</strong> moradores de Itapuã do Oeste, a Secretaria responsável pela limpeza urbana e as equipes de coleta.</p>
+      </section>
+      <section class="card">
+        <h2>Metodologia</h2>
+        <ol class="lista">
+          <li>Levantamento de requisitos com a Prefeitura e a comunidade.</li>
+          <li>Prototipação e validação das telas com usuários.</li>
+          <li>Desenvolvimento do sistema web responsivo.</li>
+          <li>Cadastro dos dados reais de setores e rotas.</li>
+          <li>Divulgação e capacitação dos servidores municipais.</li>
+          <li>Avaliação do uso e ajustes a partir do retorno da população.</li>
+        </ol>
+      </section>
+    </div>
+
+    <h2 class="titulo-estatisticas">O sistema em números</h2>
+    <div class="grid grid-4 estatisticas" id="estatisticas"></div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p><strong>Coleta Itapuã</strong> — Projeto de Extensão · Sistema de gestão do cronograma de coleta de resíduos sólidos de Itapuã do Oeste/RO.</p>
+    <p>Os setores, ruas e horários exibidos são dados de exemplo até o cadastro das informações oficiais pela Prefeitura.</p>
+  </div>
+</footer>
+
+</body>
+</html>

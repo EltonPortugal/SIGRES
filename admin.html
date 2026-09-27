@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área administrativa — Coleta Itapuã</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="img/icone.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <script type="module" src="js/paginas/admin.js"></script>
+</head>
+<body class="pagina-admin">
+
+<header class="topo">
+  <div class="container">
+    <a href="index.html" class="marca">
+      <img src="img/icone.svg" width="36" height="36" alt="">
+      <span>Coleta Itapuã<small>Área administrativa</small></span>
+    </a>
+    <button class="btn-menu" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menuPrincipal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <nav class="menu" id="menuPrincipal">
+      <ul>
+        <li><a href="index.html">Voltar ao site</a></li>
+        <li><a href="sobre.html">O projeto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="aviso-carregamento container" data-aviso-carregamento>
+  Se esta mensagem não desaparecer, abra o site por um servidor local (veja o arquivo README.md).
+</div>
+
+<main class="bloco">
+  <div class="container">
+    <h1>Área administrativa</h1>
+    <p class="subtitulo">Cadastro de setores, rotas, dias de coleta e avisos. Uso restrito à equipe gestora.</p>
+
+    <!-- Login -->
+    <section id="adminLogin" class="card login" hidden>
+      <h2>Entrar</h2>
+      <form id="formLogin">
+        <div class="campo"><label for="loginUsuario">Usuário</label><input id="loginUsuario" name="usuario" type="text" autocomplete="username" required></div>
+        <div class="campo"><label for="loginSenha">Senha</label><input id="loginSenha" name="senha" type="password" autocomplete="current-password" required></div>
+        <button class="btn" type="submit">Entrar</button>
+      </form>
+      <p class="nota">Protótipo: usuário <strong>admin</strong> e senha <strong>admin123</strong>. Os dados ficam salvos apenas neste navegador. Para uso em produção, a autenticação e o armazenamento devem ser feitos em um servidor.</p>
+    </section>
+
+    <!-- Painel -->
+    <section id="adminPainel" hidden>
+      <div class="barra-admin">
+        <span>Conectado como <strong>admin</strong></span>
+        <div class="acoes">
+          <button class="btn sec pequeno" type="button" id="btnExportar">Exportar backup (JSON)</button>
+          <label class="btn sec pequeno">Importar backup<input type="file" accept="application/json" id="inputImportar" hidden></label>
+          <button class="btn sec pequeno" type="button" id="btnRestaurar">Dados de exemplo</button>
+          <button class="btn perigo pequeno" type="button" id="btnSair">Sair</button>
+        </div>
+      </div>
+
+      <div class="abas" role="tablist">
+        <button type="button" role="tab" aria-selected="true" aria-controls="pSetores">Setores</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="pRotas">Rotas</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="pColetas">Dias de coleta</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="pAvisos">Avisos</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="pInscritos">Inscritos</button>
+      </div>
+
+      <!-- Setores -->
+      <div class="painel" id="pSetores" role="tabpanel">
+        <div class="grid grid-2 alinhar-topo">
+          <form class="card">
+            <h3 data-titulo>Novo setor</h3>
+            <input type="hidden" name="id">
+            <div class="linha">
+              <div class="campo campo-largo"><label for="setorNome">Nome do setor</label><input id="setorNome" name="nome" type="text" required maxlength="60" placeholder="Ex.: Setor 1 — Centro"></div>
+              <div class="campo campo-cor"><label for="setorCor">Cor</label><input id="setorCor" name="cor" type="color" value="#1f7a4d"></div>
+            </div>
+            <div class="campo"><label for="setorBairros">Bairros atendidos (um por linha)</label><textarea id="setorBairros" name="bairros" required placeholder="Centro&#10;Vila Nova"></textarea></div>
+            <div class="acoes"><button class="btn" type="submit">Salvar setor</button><button class="btn sec" type="button" data-acao="cancelar">Cancelar</button></div>
+          </form>
+          <div class="card tabela-wrap"><table><thead><tr><th>Setor</th><th>Bairros</th><th><span class="sr-only">Ações</span></th></tr></thead><tbody></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- Rotas -->
+      <div class="painel" id="pRotas" role="tabpanel" hidden>
+        <div class="grid grid-2 alinhar-topo">
+          <form class="card">
+            <h3 data-titulo>Nova rota</h3>
+            <input type="hidden" name="id">
+            <div class="campo"><label for="rotaNome">Nome da rota</label><input id="rotaNome" name="nome" type="text" required maxlength="60" placeholder="Ex.: Rota A — Centro comercial"></div>
+            <div class="campo"><label for="rotaSetor">Setor</label><select id="rotaSetor" name="setorId" required data-select-setores></select></div>
+            <div class="campo"><label for="rotaLogradouros">Ruas / logradouros atendidos (um por linha)</label><textarea id="rotaLogradouros" name="logradouros" required></textarea></div>
+            <div class="linha">
+              <div class="campo"><label for="rotaVeiculo">Veículo</label><input id="rotaVeiculo" name="veiculo" type="text" maxlength="40" placeholder="Caminhão compactador 01"></div>
+              <div class="campo"><label for="rotaResponsavel">Responsável / motorista</label><input id="rotaResponsavel" name="responsavel" type="text" maxlength="60"></div>
+            </div>
+            <div class="acoes"><button class="btn" type="submit">Salvar rota</button><button class="btn sec" type="button" data-acao="cancelar">Cancelar</button></div>
+          </form>
+          <div class="card tabela-wrap"><table><thead><tr><th>Rota</th><th>Setor</th><th>Logradouros</th><th><span class="sr-only">Ações</span></th></tr></thead><tbody></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- Dias de coleta -->
+      <div class="painel" id="pColetas" role="tabpanel" hidden>
+        <div class="grid grid-2 alinhar-topo">
+          <form class="card">
+            <h3 data-titulo>Novo dia de coleta</h3>
+            <input type="hidden" name="id">
+            <div class="linha">
+              <div class="campo"><label for="coletaSetor">Setor</label><select id="coletaSetor" name="setorId" required data-select-setores></select></div>
+              <div class="campo"><label for="coletaTipo">Tipo de resíduo</label><select id="coletaTipo" name="tipo" required></select></div>
+            </div>
+            <fieldset class="campo">
+              <legend>Dias da semana</legend>
+              <div class="dias-semana" id="coletaDias"></div>
+            </fieldset>
+            <div class="linha">
+              <div class="campo"><label for="coletaInicio">Horário inicial</label><input id="coletaInicio" name="inicio" type="time" required value="07:00"></div>
+              <div class="campo"><label for="coletaFim">Horário final</label><input id="coletaFim" name="fim" type="time" required value="11:00"></div>
+            </div>
+            <div class="campo"><label for="coletaObs">Observação (opcional)</label><input id="coletaObs" name="obs" type="text" maxlength="120" placeholder="Ex.: colocar o lixo até 30 min antes"></div>
+            <div class="acoes"><button class="btn" type="submit">Salvar</button><button class="btn sec" type="button" data-acao="cancelar">Cancelar</button></div>
+          </form>
+          <div class="card tabela-wrap"><table><thead><tr><th>Setor</th><th>Tipo</th><th>Dias</th><th>Horário</th><th><span class="sr-only">Ações</span></th></tr></thead><tbody></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- Avisos -->
+      <div class="painel" id="pAvisos" role="tabpanel" hidden>
+        <div class="grid grid-2 alinhar-topo">
+          <form class="card">
+            <h3 data-titulo>Novo aviso</h3>
+            <input type="hidden" name="id">
+            <div class="campo"><label for="avisoTitulo">Título</label><input id="avisoTitulo" name="titulo" type="text" required maxlength="90"></div>
+            <div class="campo"><label for="avisoMensagem">Mensagem</label><textarea id="avisoMensagem" name="mensagem" required maxlength="600"></textarea></div>
+            <div class="linha">
+              <div class="campo"><label for="avisoSetor">Destino</label><select id="avisoSetor" name="setorId" data-select-setores="Todos os setores"></select></div>
+              <div class="campo"><label for="avisoTipo">Prioridade</label><select id="avisoTipo" name="tipo"></select></div>
+            </div>
+            <div class="linha">
+              <div class="campo"><label for="avisoInicio">Publicar em</label><input id="avisoInicio" name="inicio" type="date" required></div>
+              <div class="campo"><label for="avisoFim">Válido até (opcional)</label><input id="avisoFim" name="fim" type="date"></div>
+            </div>
+            <div class="acoes"><button class="btn" type="submit">Publicar aviso</button><button class="btn sec" type="button" data-acao="cancelar">Cancelar</button></div>
+          </form>
+          <div class="card tabela-wrap"><table><thead><tr><th>Aviso</th><th>Destino</th><th>Período</th><th><span class="sr-only">Ações</span></th></tr></thead><tbody></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- Inscritos -->
+      <div class="painel" id="pInscritos" role="tabpanel" hidden>
+        <div class="card">
+          <div class="barra-admin">
+            <h3>Moradores inscritos para receber avisos</h3>
+            <button class="btn sec pequeno" type="button" id="btnExportarCSV">Exportar CSV</button>
+          </div>
+          <p class="nota">No protótipo, o envio é simulado: o botão de mensagem abre o WhatsApp com o texto do último aviso do setor. Em produção, o disparo pode ser integrado a um serviço de SMS, WhatsApp Business ou e-mail.</p>
+          <div class="tabela-wrap"><table><thead><tr><th>Nome</th><th>Contato</th><th>Setor</th><th>Data</th><th><span class="sr-only">Ações</span></th></tr></thead><tbody id="tbInscritos"></tbody></table></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+</body>
+</html>

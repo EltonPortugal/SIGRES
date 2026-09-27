@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coleta Itapuã — Cronograma de Coleta de Resíduos</title>
+  <meta name="description" content="Consulta pública do cronograma de coleta de resíduos sólidos de Itapuã do Oeste/RO: dias de coleta por bairro, calendário e avisos à população.">
+  <link rel="icon" href="img/icone.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/publico.css">
+  <script type="module" src="js/paginas/index.js"></script>
+</head>
+<body>
+
+<header class="topo">
+  <div class="container">
+    <a href="index.html" class="marca">
+      <img src="img/icone.svg" width="36" height="36" alt="">
+      <span>Coleta Itapuã<small>Itapuã do Oeste / RO</small></span>
+    </a>
+    <button class="btn-menu" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menuPrincipal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <nav class="menu" id="menuPrincipal">
+      <ul>
+        <li><a href="#consulta">Consultar coleta</a></li>
+        <li><a href="#calendario">Calendário</a></li>
+        <li><a href="#avisos">Avisos</a></li>
+        <li><a href="sobre.html">O projeto</a></li>
+        <li><a href="admin.html">Área administrativa</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="aviso-carregamento container" data-aviso-carregamento>
+  Se esta mensagem não desaparecer, abra o site por um servidor local (veja o arquivo README.md).
+</div>
+
+<main>
+  <div class="hero">
+    <div class="container">
+      <h1>Saiba quando o caminhão da coleta passa na sua rua</h1>
+      <p>Consulte os dias e horários da coleta de resíduos do seu bairro em Itapuã do Oeste, veja o calendário do mês e receba avisos da Prefeitura sobre mudanças no serviço.</p>
+      <form class="busca-hero" id="formHero" role="search">
+        <input name="q" type="text" list="listaSugestoes" placeholder="Digite seu bairro ou rua (ex.: Centro, Rua das Flores)" aria-label="Bairro ou endereço">
+        <button class="btn" type="submit">Consultar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Consulta por bairro/endereço -->
+  <section class="bloco" id="consulta">
+    <div class="container">
+      <h2>Consultar coleta por bairro ou endereço</h2>
+      <p class="subtitulo">Informe o nome do bairro ou da rua para ver o setor, os dias e o horário da coleta.</p>
+      <div class="card">
+        <form id="formConsulta" role="search">
+          <div class="linha">
+            <div class="campo campo-largo">
+              <label for="campoBusca">Bairro ou endereço</label>
+              <input id="campoBusca" name="q" type="text" list="listaSugestoes" placeholder="Ex.: Vila Nova" autocomplete="off">
+            </div>
+            <div class="campo campo-botao">
+              <button class="btn" type="submit">Buscar</button>
+            </div>
+          </div>
+        </form>
+        <datalist id="listaSugestoes"></datalist>
+        <div id="resultadoBusca" class="resultado" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calendário -->
+  <section class="bloco bloco-claro" id="calendario">
+    <div class="container">
+      <h2>Calendário de coleta</h2>
+      <p class="subtitulo">Selecione o setor para ver os dias de coleta do mês.</p>
+      <div class="card">
+        <div class="cal-topo">
+          <div class="cal-setor">
+            <label for="calSetor">Setor</label>
+            <select id="calSetor"></select>
+          </div>
+          <div class="cal-nav">
+            <button class="btn sec pequeno" type="button" id="calAnterior" aria-label="Mês anterior">‹</button>
+            <h3 id="calTitulo" aria-live="polite"></h3>
+            <button class="btn sec pequeno" type="button" id="calProximo" aria-label="Próximo mês">›</button>
+          </div>
+          <button class="btn sec pequeno" type="button" id="calImprimir">Imprimir</button>
+        </div>
+        <div id="calGrade" class="calendario"></div>
+        <div id="calLegenda" class="legenda"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Avisos -->
+  <section class="bloco" id="avisos">
+    <div class="container">
+      <h2>Avisos à população</h2>
+      <p class="subtitulo">Comunicados sobre alterações de rota, feriados, mutirões e orientações de descarte.</p>
+      <div class="grid grid-2 alinhar-topo">
+        <div>
+          <div class="campo filtro-avisos">
+            <label for="filtroAvisos">Filtrar por setor</label>
+            <select id="filtroAvisos"></select>
+          </div>
+          <div id="listaAvisos" class="grid"></div>
+        </div>
+        <div class="card">
+          <h3>Quero receber avisos</h3>
+          <p class="texto-suave">Cadastre-se para ser avisado por WhatsApp/SMS ou e-mail quando houver mudanças na coleta do seu setor.</p>
+          <form id="formInscricao">
+            <div class="campo"><label for="insNome">Nome</label><input id="insNome" name="nome" type="text" required maxlength="80" autocomplete="name"></div>
+            <div class="campo"><label for="insContato">WhatsApp, telefone ou e-mail</label><input id="insContato" name="contato" type="text" required maxlength="80" placeholder="(69) 9 0000-0000"></div>
+            <div class="campo"><label for="insSetor">Seu setor / bairro</label><select id="insSetor" name="setorId" required></select></div>
+            <div class="campo">
+              <label class="consentimento">
+                <input type="checkbox" name="consentimento" required>
+                <span>Autorizo o uso destes dados apenas para o envio de avisos sobre a coleta de resíduos (LGPD).</span>
+              </label>
+            </div>
+            <button class="btn" type="submit">Cadastrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p><strong>Coleta Itapuã</strong> — Projeto de Extensão · Sistema de gestão do cronograma de coleta de resíduos sólidos de Itapuã do Oeste/RO.</p>
+    <p>Os setores, ruas e horários exibidos são dados de exemplo até o cadastro das informações oficiais pela Prefeitura.</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "setores": [
+    { "id": "setor-1", "nome": "Setor 1 — Centro", "cor": "#1f7a4d", "bairros": ["Centro", "Vila Nova"] },
+    { "id": "setor-2", "nome": "Setor 2 — Norte", "cor": "#8e44ad", "bairros": ["Jardim das Palmeiras", "Bairro Novo Horizonte"] },
+    { "id": "setor-3", "nome": "Setor 3 — Sul", "cor": "#d35400", "bairros": ["Bairro Primavera", "Bairro São Francisco"] },
+    { "id": "setor-4", "nome": "Setor 4 — Zona rural", "cor": "#16a085", "bairros": ["Linhas e chácaras próximas", "Distrito rural"] }
+  ],
+  "rotas": [
+    { "id": "rota-a", "nome": "Rota A — Centro comercial", "setorId": "setor-1", "logradouros": ["Avenida Principal", "Rua das Flores", "Rua Rondônia"], "veiculo": "Caminhão compactador 01", "responsavel": "Equipe 1" },
+    { "id": "rota-b", "nome": "Rota B — Vila Nova", "setorId": "setor-1", "logradouros": ["Rua Amazonas", "Rua Acre", "Travessa Pará"], "veiculo": "Caminhão compactador 01", "responsavel": "Equipe 1" },
+    { "id": "rota-c", "nome": "Rota C — Norte", "setorId": "setor-2", "logradouros": ["Rua dos Ipês", "Rua das Palmeiras", "Rua Jamari"], "veiculo": "Caminhão compactador 02", "responsavel": "Equipe 2" },
+    { "id": "rota-d", "nome": "Rota D — Sul", "setorId": "setor-3", "logradouros": ["Rua São Francisco", "Rua Primavera", "Rua Madeira"], "veiculo": "Caminhão compactador 02", "responsavel": "Equipe 2" },
+    { "id": "rota-e", "nome": "Rota E — Rural", "setorId": "setor-4", "logradouros": ["Estrada vicinal principal"], "veiculo": "Caminhão caçamba", "responsavel": "Equipe 3" }
+  ],
+  "coletas": [
+    { "id": "coleta-1", "setorId": "setor-1", "tipo": "comum", "dias": [1, 3, 5], "inicio": "07:00", "fim": "11:00", "obs": "Colocar o lixo na calçada até as 7h." },
+    { "id": "coleta-2", "setorId": "setor-1", "tipo": "reciclavel", "dias": [2], "inicio": "08:00", "fim": "11:00", "obs": "Separe papel, plástico, metal e vidro." },
+    { "id": "coleta-3", "setorId": "setor-1", "tipo": "volumosos", "dias": [6], "inicio": "07:00", "fim": "11:00", "obs": "Agende pelo telefone da Prefeitura." },
+    { "id": "coleta-4", "setorId": "setor-2", "tipo": "comum", "dias": [2, 4, 6], "inicio": "07:00", "fim": "11:00", "obs": "" },
+    { "id": "coleta-5", "setorId": "setor-2", "tipo": "reciclavel", "dias": [3], "inicio": "08:00", "fim": "11:00", "obs": "" },
+    { "id": "coleta-6", "setorId": "setor-3", "tipo": "comum", "dias": [1, 3, 5], "inicio": "13:00", "fim": "17:00", "obs": "" },
+    { "id": "coleta-7", "setorId": "setor-3", "tipo": "reciclavel", "dias": [4], "inicio": "13:00", "fim": "16:00", "obs": "" },
+    { "id": "coleta-8", "setorId": "setor-4", "tipo": "comum", "dias": [2], "inicio": "07:00", "fim": "12:00", "obs": "Deixar os sacos no ponto de coleta da estrada." }
+  ],
+  "avisos": [
+    { "id": "aviso-1", "titulo": "Bem-vindo ao novo calendário de coleta", "mensagem": "Agora você pode consultar pela internet os dias e horários da coleta no seu bairro. Coloque o lixo para fora apenas no dia da coleta, em sacos bem fechados.", "setorId": "", "tipo": "info", "inicio": "", "fim": "" },
+    { "id": "aviso-2", "titulo": "Separe os recicláveis", "mensagem": "Papel, papelão, plástico, metal e vidro limpos devem ser separados do lixo comum e entregues no dia da coleta seletiva.", "setorId": "setor-1", "tipo": "alerta", "inicio": "", "fim": "" }
+  ],
+  "inscritos": []
+}

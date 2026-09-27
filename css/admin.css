@@ -1,0 +1,32 @@
+/* =========================================================
+   Área administrativa
+   ========================================================= */
+.pagina-admin { background: #eef2f0; }
+.pagina-admin h1 { font-size: 1.8rem; }
+
+.login { max-width: 420px; }
+.login .nota { margin-top: 14px; }
+
+.barra-admin { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.barra-admin h3 { margin: 0; }
+
+/* ---------- Abas ---------- */
+.abas { display: flex; gap: 4px; flex-wrap: wrap; border-bottom: 2px solid var(--borda); margin-bottom: 20px; }
+.abas button {
+  background: none; border: none; padding: 10px 16px; font: inherit; font-weight: 600; color: var(--texto-suave);
+  cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px;
+}
+.abas button[aria-selected="true"] { color: var(--verde); border-bottom-color: var(--verde); }
+
+/* ---------- Campos específicos ---------- */
+.linha > .campo-cor { flex: 0 0 90px; }
+.campo-cor input { width: 100%; height: 42px; border: 1px solid var(--borda); border-radius: 8px; padding: 2px; background: #fff; }
+
+.dias-semana { display: flex; gap: 6px; flex-wrap: wrap; }
+.dias-semana label {
+  font-weight: 500; display: flex; align-items: center; gap: 4px; margin: 0; cursor: pointer;
+  border: 1px solid var(--borda); border-radius: 8px; padding: 6px 10px; background: #fff;
+}
+.dias-semana input { margin: 0; }
+
+.cor-bolinha { display: inline-block; width: 14px; height: 14px; border-radius: 50%; vertical-align: -2px; margin-right: 6px; background: var(--cor); }

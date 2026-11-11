@@ -93,6 +93,7 @@
         <button type="button" role="tab" id="abaColetas" aria-selected="false" aria-controls="pColetas" tabindex="-1">Dias de coleta</button>
         <button type="button" role="tab" id="abaAvisos" aria-selected="false" aria-controls="pAvisos" tabindex="-1">Avisos</button>
         <button type="button" role="tab" id="abaInscritos" aria-selected="false" aria-controls="pInscritos" tabindex="-1">Inscritos</button>
+        <button type="button" role="tab" id="abaAtividades" aria-selected="false" aria-controls="pAtividades" tabindex="-1">Atividades</button>
       </div>
 
       <!-- Setores -->
@@ -187,6 +188,18 @@
           </div>
           <p class="nota">No protótipo, o envio é simulado: o botão de mensagem abre o WhatsApp com o texto do último aviso do setor. Em produção, o disparo pode ser integrado a um serviço de SMS, WhatsApp Business ou e-mail.</p>
           <div class="tabela-wrap"><table><thead><tr><th>Nome</th><th>Contato</th><th>Setor</th><th>Data</th><th><span class="sr-only">Ações</span></th></tr></thead><tbody id="tbInscritos"></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- Atividades (auditoria) -->
+      <div class="painel" id="pAtividades" role="tabpanel" aria-labelledby="abaAtividades" tabindex="0" hidden>
+        <div class="card">
+          <div class="barra-admin">
+            <h3>Histórico de atividades</h3>
+            <button class="btn sec pequeno" type="button" id="btnExportarAuditoria">Exportar CSV</button>
+          </div>
+          <p class="nota">Registro das ações realizadas no painel (cadastros, alterações, exclusões, importações e acessos), para conferência e prestação de contas. São exibidas as 200 mais recentes.</p>
+          <div class="tabela-wrap"><table><thead><tr><th>Data e hora</th><th>Usuário</th><th>Ação</th><th>Descrição</th></tr></thead><tbody id="tbAuditoria"></tbody></table></div>
         </div>
       </div>
     </section>

@@ -4,6 +4,7 @@ import { avisosAtivos } from '../agenda.js';
 import { listar, buscar, removerItem } from '../store.js';
 import { $, toast, baixarArquivo } from '../ui.js';
 import { esc, dataBR } from '../utils.js';
+import { registrar } from './auditoria.js';
 
 export function iniciarInscritos() {
   $('#btnExportarCSV').addEventListener('click', exportarCSV);
@@ -13,7 +14,9 @@ export function iniciarInscritos() {
     const id = botao.closest('tr').dataset.id;
     if (botao.dataset.acao === 'mensagem') enviarWhatsApp(id);
     if (botao.dataset.acao === 'excluir' && confirm('Remover este inscrito?')) {
+      const inscrito = buscar('inscritos', id);
       removerItem('inscritos', id);
+      registrar('excluir', `Inscrito: ${inscrito.nome}`);
       toast('Inscrito removido.');
     }
   });
@@ -63,4 +66,5 @@ function exportarCSV() {
   // BOM + ";" para o Excel em português abrir com acentos e colunas corretas.
   const csv = '﻿' + linhas.map(l => l.map(celula).join(';')).join('\r\n');
   baixarArquivo('inscritos-coleta.csv', csv, 'text/csv;charset=utf-8');
+  registrar('exportar', `Lista de inscritos (${linhas.length - 1} registro(s))`);
 }

@@ -37,6 +37,12 @@ function persistir() {
   }
 }
 
+/** Atualiza bases salvas por versões anteriores para o formato atual. */
+function migrar(base) {
+  base.auditoria = Array.isArray(base.auditoria) ? base.auditoria : [];
+  return base;
+}
+
 const notificar = () => ouvintes.forEach(fn => fn());
 
 function confirmar() {
@@ -49,8 +55,9 @@ export async function iniciar() {
   dados = lerDoNavegador();
   if (!dados) {
     dados = await carregarExemplo();
-    persistir();
   }
+  migrar(dados);
+  persistir();
   // Mantém abertas várias abas (ex.: site público e área administrativa) sincronizadas.
   window.addEventListener('storage', evento => {
     if (evento.key !== CHAVE_DADOS) return;
@@ -98,12 +105,25 @@ export function removerSetor(id) {
 
 export function substituirTudo(novos) {
   if (!dadosValidos(novos)) throw new Error('Estrutura de dados inválida.');
-  dados = novos;
+  const auditoria = dados.auditoria;
+  dados = migrar(novos);
+  dados.auditoria = auditoria; // o histórico local de atividades é preservado
   confirmar();
 }
 
 export async function restaurarExemplo() {
-  dados = await carregarExemplo();
+  const auditoria = dados.auditoria;
+  dados = migrar(await carregarExemplo());
+  dados.auditoria = auditoria;
+  confirmar();
+}
+
+const LIMITE_AUDITORIA = 1000;
+
+/** Acrescenta um registro ao histórico de atividades administrativas (mais recente primeiro). */
+export function registrarAtividade({ usuario, acao, descricao }) {
+  dados.auditoria.unshift({ id: uid(), data: new Date().toISOString(), usuario, acao, descricao });
+  dados.auditoria.length = Math.min(dados.auditoria.length, LIMITE_AUDITORIA);
   confirmar();
 }
 

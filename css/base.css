@@ -104,6 +104,8 @@ a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visib
 }
 textarea { min-height: 90px; resize: vertical; }
 .campo { margin-bottom: 14px; }
+.erro-formulario { color: var(--vermelho); font-weight: 600; font-size: .9rem; margin: 0 0 10px; }
+.erro-formulario:empty { display: none; }
 .linha { display: flex; gap: 12px; flex-wrap: wrap; }
 .linha > .campo { flex: 1 1 200px; }
 .linha > .campo-largo { flex: 3 1 280px; }

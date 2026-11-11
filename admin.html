@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Painel de gestão — SIGRES | Prefeitura de Itapuã do Oeste</title>
   <meta name="robots" content="noindex">
   <link rel="icon" href="img/icone.svg" type="image/svg+xml">
@@ -67,15 +69,16 @@
       <form id="formLogin">
         <div class="campo"><label for="loginUsuario">Usuário</label><input id="loginUsuario" name="usuario" type="text" autocomplete="username" required></div>
         <div class="campo"><label for="loginSenha">Senha</label><input id="loginSenha" name="senha" type="password" autocomplete="current-password" required></div>
+        <p id="loginErro" class="erro-formulario" role="alert"></p>
         <button class="btn" type="submit">Entrar</button>
       </form>
-      <p class="nota">Protótipo: usuário <strong>admin</strong> e senha <strong>admin123</strong>. Os dados ficam salvos apenas neste navegador. Para uso em produção, a autenticação e o armazenamento devem ser feitos em um servidor.</p>
+      <p class="nota">Acesso restrito aos servidores autorizados da Prefeitura. Por segurança, a sessão é encerrada após 30 minutos sem atividade e o acesso é bloqueado temporariamente após 5 tentativas incorretas.</p>
     </section>
 
     <!-- Painel -->
     <section id="adminPainel" hidden>
       <div class="barra-admin">
-        <span>Conectado como <strong>admin</strong></span>
+        <span>Conectado como <strong id="usuarioLogado"></strong></span>
         <div class="acoes">
           <button class="btn sec pequeno" type="button" id="btnExportar">Exportar backup (JSON)</button>
           <label class="btn sec pequeno">Importar backup<input type="file" accept="application/json" id="inputImportar" hidden></label>
@@ -90,6 +93,7 @@
         <button type="button" role="tab" id="abaColetas" aria-selected="false" aria-controls="pColetas" tabindex="-1">Dias de coleta</button>
         <button type="button" role="tab" id="abaAvisos" aria-selected="false" aria-controls="pAvisos" tabindex="-1">Avisos</button>
         <button type="button" role="tab" id="abaInscritos" aria-selected="false" aria-controls="pInscritos" tabindex="-1">Inscritos</button>
+        <button type="button" role="tab" id="abaAtividades" aria-selected="false" aria-controls="pAtividades" tabindex="-1">Atividades</button>
       </div>
 
       <!-- Setores -->
@@ -184,6 +188,18 @@
           </div>
           <p class="nota">No protótipo, o envio é simulado: o botão de mensagem abre o WhatsApp com o texto do último aviso do setor. Em produção, o disparo pode ser integrado a um serviço de SMS, WhatsApp Business ou e-mail.</p>
           <div class="tabela-wrap"><table><thead><tr><th>Nome</th><th>Contato</th><th>Setor</th><th>Data</th><th><span class="sr-only">Ações</span></th></tr></thead><tbody id="tbInscritos"></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- Atividades (auditoria) -->
+      <div class="painel" id="pAtividades" role="tabpanel" aria-labelledby="abaAtividades" tabindex="0" hidden>
+        <div class="card">
+          <div class="barra-admin">
+            <h3>Histórico de atividades</h3>
+            <button class="btn sec pequeno" type="button" id="btnExportarAuditoria">Exportar CSV</button>
+          </div>
+          <p class="nota">Registro das ações realizadas no painel (cadastros, alterações, exclusões, importações e acessos), para conferência e prestação de contas. São exibidas as 200 mais recentes.</p>
+          <div class="tabela-wrap"><table><thead><tr><th>Data e hora</th><th>Usuário</th><th>Ação</th><th>Descrição</th></tr></thead><tbody id="tbAuditoria"></tbody></table></div>
         </div>
       </div>
     </section>

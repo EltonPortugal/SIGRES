@@ -4,33 +4,63 @@ import { iniciar, aoMudar } from '../store.js';
 import { iniciarMenu } from '../menu.js';
 import { iniciarAcessibilidade } from '../acessibilidade.js';
 import { $, $$, toast, preencherSelectSetores, marcarCarregado } from '../ui.js';
-import { estaLogado, entrar, sair } from '../admin/auth.js';
+import { estaLogado, entrar, sair, renovarSessao, usuarioLogado } from '../admin/auth.js';
 import { iniciarCadastros } from '../admin/cadastros.js';
 import { iniciarInscritos, renderInscritos } from '../admin/inscritos.js';
 import { iniciarBackup } from '../admin/backup.js';
+import { iniciarAuditoria, renderAuditoria, registrar } from '../admin/auditoria.js';
 
 function atualizarAcesso() {
   const logado = estaLogado();
   $('#adminLogin').hidden = logado;
   $('#adminPainel').hidden = !logado;
+  $('#usuarioLogado').textContent = usuarioLogado() ?? '';
 }
 
 function iniciarLogin() {
   const form = $('#formLogin');
-  form.addEventListener('submit', evento => {
+  const botao = $('button[type="submit"]', form);
+  const erro = $('#loginErro');
+
+  form.addEventListener('submit', async evento => {
     evento.preventDefault();
-    if (entrar(form.elements.usuario.value, form.elements.senha.value)) {
-      form.reset();
-      atualizarAcesso();
-      toast('Bem-vindo à área administrativa.');
-    } else {
-      toast('Usuário ou senha inválidos.');
+    botao.disabled = true;
+    erro.textContent = '';
+    try {
+      const resultado = await entrar(form.elements.usuario.value, form.elements.senha.value);
+      if (resultado.ok) {
+        form.reset();
+        registrar('login', 'Acesso ao painel de gestão');
+        atualizarAcesso();
+        toast('Bem-vindo ao painel de gestão.');
+      } else {
+        erro.textContent = resultado.motivo;
+        form.elements.senha.value = '';
+        form.elements.senha.focus();
+      }
+    } catch (falha) {
+      erro.textContent = falha.message;
+    } finally {
+      botao.disabled = false;
     }
   });
+
   $('#btnSair').addEventListener('click', () => {
+    registrar('logout', 'Saída pelo botão Sair');
     sair();
     atualizarAcesso();
   });
+}
+
+/** Renova a sessão a cada interação e encerra quando expira por inatividade. */
+function iniciarControleDeSessao() {
+  ['click', 'keydown'].forEach(tipo => document.addEventListener(tipo, () => estaLogado() && renovarSessao()));
+  setInterval(() => {
+    if (!$('#adminPainel').hidden && !estaLogado()) {
+      atualizarAcesso();
+      toast('Sessão encerrada por inatividade. Entre novamente.');
+    }
+  }, 30_000);
 }
 
 /** Abas acessíveis (padrão WAI-ARIA): setas, Home e End alternam entre as abas. */
@@ -69,15 +99,18 @@ async function main() {
   await iniciar();
   marcarCarregado();
   iniciarLogin();
+  iniciarControleDeSessao();
   iniciarAbas();
   iniciarBackup();
   iniciarInscritos();
+  iniciarAuditoria();
   const renderCadastros = iniciarCadastros();
 
   const renderizar = () => {
     $$('select[data-select-setores]').forEach(s => preencherSelectSetores(s, s.dataset.selectSetores));
     renderCadastros();
     renderInscritos();
+    renderAuditoria();
   };
   aoMudar(renderizar);
   renderizar();

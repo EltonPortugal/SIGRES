@@ -26,6 +26,9 @@ export const CREDENCIAL_ADMIN = {
   iteracoes: 210000
 };
 
+/** Versão do termo de consentimento (privacidade.html). Incremente ao alterar a política. */
+export const VERSAO_TERMO = '1.0';
+
 /** Encerra a sessão administrativa após este tempo sem atividade. */
 export const SESSAO_MINUTOS = 30;
 /** Tentativas de login incorretas antes do bloqueio temporário. */

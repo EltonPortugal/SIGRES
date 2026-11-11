@@ -139,7 +139,7 @@
           <p class="texto-suave">Cadastre-se para ser avisado por WhatsApp/SMS ou e-mail quando houver mudanças na coleta do seu setor.</p>
           <form id="formInscricao">
             <div class="campo"><label for="insNome">Nome</label><input id="insNome" name="nome" type="text" required maxlength="80" autocomplete="name"></div>
-            <div class="campo"><label for="insContato">WhatsApp, telefone ou e-mail</label><input id="insContato" name="contato" type="text" required maxlength="80" placeholder="(69) 9 0000-0000"></div>
+            <div class="campo"><label for="insContato">WhatsApp, telefone ou e-mail</label><input id="insContato" name="contato" type="text" required maxlength="80" placeholder="(69) 9 0000-0000" autocomplete="tel" aria-describedby="inscricaoErro"></div>
             <div class="campo"><label for="insSetor">Seu setor / bairro</label><select id="insSetor" name="setorId" required></select></div>
             <div class="campo">
               <label class="consentimento">
@@ -147,6 +147,7 @@
                 <span>Li a <a href="privacidade.html" target="_blank" rel="noopener">política de privacidade</a> e autorizo o uso destes dados apenas para o envio de avisos sobre a coleta de resíduos (LGPD, art. 7º, I).</span>
               </label>
             </div>
+            <p id="inscricaoErro" class="erro-formulario" role="alert"></p>
             <button class="btn" type="submit">Cadastrar</button>
           </form>
         </div>

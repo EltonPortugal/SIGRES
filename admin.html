@@ -83,16 +83,16 @@
         </div>
       </div>
 
-      <div class="abas" role="tablist">
-        <button type="button" role="tab" aria-selected="true" aria-controls="pSetores">Setores</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="pRotas">Rotas</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="pColetas">Dias de coleta</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="pAvisos">Avisos</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="pInscritos">Inscritos</button>
+      <div class="abas" role="tablist" aria-label="Cadastros">
+        <button type="button" role="tab" id="abaSetores" aria-selected="true" aria-controls="pSetores" tabindex="0">Setores</button>
+        <button type="button" role="tab" id="abaRotas" aria-selected="false" aria-controls="pRotas" tabindex="-1">Rotas</button>
+        <button type="button" role="tab" id="abaColetas" aria-selected="false" aria-controls="pColetas" tabindex="-1">Dias de coleta</button>
+        <button type="button" role="tab" id="abaAvisos" aria-selected="false" aria-controls="pAvisos" tabindex="-1">Avisos</button>
+        <button type="button" role="tab" id="abaInscritos" aria-selected="false" aria-controls="pInscritos" tabindex="-1">Inscritos</button>
       </div>
 
       <!-- Setores -->
-      <div class="painel" id="pSetores" role="tabpanel">
+      <div class="painel" id="pSetores" role="tabpanel" aria-labelledby="abaSetores" tabindex="0">
         <div class="grid grid-2 alinhar-topo">
           <form class="card">
             <h3 data-titulo>Novo setor</h3>
@@ -109,7 +109,7 @@
       </div>
 
       <!-- Rotas -->
-      <div class="painel" id="pRotas" role="tabpanel" hidden>
+      <div class="painel" id="pRotas" role="tabpanel" aria-labelledby="abaRotas" tabindex="0" hidden>
         <div class="grid grid-2 alinhar-topo">
           <form class="card">
             <h3 data-titulo>Nova rota</h3>
@@ -128,7 +128,7 @@
       </div>
 
       <!-- Dias de coleta -->
-      <div class="painel" id="pColetas" role="tabpanel" hidden>
+      <div class="painel" id="pColetas" role="tabpanel" aria-labelledby="abaColetas" tabindex="0" hidden>
         <div class="grid grid-2 alinhar-topo">
           <form class="card">
             <h3 data-titulo>Novo dia de coleta</h3>
@@ -153,7 +153,7 @@
       </div>
 
       <!-- Avisos -->
-      <div class="painel" id="pAvisos" role="tabpanel" hidden>
+      <div class="painel" id="pAvisos" role="tabpanel" aria-labelledby="abaAvisos" tabindex="0" hidden>
         <div class="grid grid-2 alinhar-topo">
           <form class="card">
             <h3 data-titulo>Novo aviso</h3>
@@ -175,7 +175,7 @@
       </div>
 
       <!-- Inscritos -->
-      <div class="painel" id="pInscritos" role="tabpanel" hidden>
+      <div class="painel" id="pInscritos" role="tabpanel" aria-labelledby="abaInscritos" tabindex="0" hidden>
         <div class="card">
           <div class="barra-admin">
             <h3>Moradores inscritos para receber avisos</h3>

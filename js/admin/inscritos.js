@@ -3,7 +3,7 @@
 import { avisosAtivos } from '../agenda.js';
 import { listar, buscar, removerItem } from '../store.js';
 import { $, toast, baixarArquivo } from '../ui.js';
-import { esc, dataBR, formatarTelefone } from '../utils.js';
+import { esc, dataBR, formatarTelefone, hojeISO } from '../utils.js';
 import { registrar } from './auditoria.js';
 
 export function iniciarInscritos() {
@@ -58,6 +58,12 @@ function enviarWhatsApp(id) {
 }
 
 function exportarCSV() {
+  if (
+    !confirm(
+      'A lista contém dados pessoais protegidos pela LGPD. Use-a apenas para o envio de avisos da coleta e não a compartilhe. Continuar?'
+    )
+  )
+    return;
   const celula = valor => `"${String(valor).replace(/"/g, '""')}"`;
   const linhas = [
     ['Nome', 'Contato', 'Setor', 'Data'],
@@ -65,6 +71,6 @@ function exportarCSV() {
   ];
   // BOM + ";" para o Excel em português abrir com acentos e colunas corretas.
   const csv = '﻿' + linhas.map(l => l.map(celula).join(';')).join('\r\n');
-  baixarArquivo('inscritos-coleta.csv', csv, 'text/csv;charset=utf-8');
+  baixarArquivo(`sigres-inscritos-${hojeISO()}.csv`, csv, 'text/csv;charset=utf-8');
   registrar('exportar', `Lista de inscritos (${linhas.length - 1} registro(s))`);
 }

@@ -1,6 +1,6 @@
 {
   "name": "sigres",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "private": true,
   "description": "SIGRES — Sistema de Gestão do Cronograma de Coleta de Resíduos Sólidos de Itapuã do Oeste/RO",
   "type": "module",

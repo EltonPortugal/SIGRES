@@ -13,6 +13,7 @@
   margin-top: 24px; display: flex; gap: 8px; max-width: 620px; background: #fff; padding: 6px; border-radius: 12px;
   box-shadow: 0 6px 24px rgba(0, 0, 0, .15);
 }
+.busca-hero:focus-within { outline: 3px solid var(--amarelo); outline-offset: 2px; }
 .busca-hero input { flex: 1; border: none; font-size: 1rem; padding: 10px 12px; outline: none; min-width: 0; color: var(--texto); }
 
 /* ---------- Resultado da consulta ---------- */
@@ -70,7 +71,11 @@
 }
 
 @media print {
-  .topo, .hero, footer, .btn, #consulta, #avisos, .aviso-carregamento { display: none !important; }
+  .topo, .hero, footer, .btn, #consulta, #avisos, .aviso-carregamento, .faixa-homologacao { display: none !important; }
+  .barra-gov { border-bottom: 2px solid #000; font-size: 11pt; margin-bottom: 12pt; }
+  .calendario .dia { break-inside: avoid; }
+  .calendario .marca-coleta { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  #calendario::after { content: "Fonte: SIGRES — Prefeitura Municipal de Itapuã do Oeste/RO"; display: block; margin-top: 12pt; font-size: 9pt; color: #444; }
   .bloco { padding: 0; }
   .card { box-shadow: none; border: none; }
 }

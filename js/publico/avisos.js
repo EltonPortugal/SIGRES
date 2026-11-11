@@ -1,26 +1,45 @@
 // Mural de avisos à população e formulário de inscrição para recebê-los.
 
-import { PRIORIDADES } from '../config.js';
+import { PRIORIDADES, VERSAO_TERMO } from '../config.js';
 import { avisosAtivos } from '../agenda.js';
-import { buscar, salvarItem } from '../store.js';
+import { buscar, listar, salvarItem } from '../store.js';
 import { $, preencherSelectSetores, toast } from '../ui.js';
-import { esc, dataBR, hojeISO } from '../utils.js';
+import { esc, dataBR, hojeISO, validarContato } from '../utils.js';
 
 export function iniciarAvisos() {
   $('#filtroAvisos').addEventListener('change', renderListaAvisos);
 
   const form = $('#formInscricao');
+  const erro = $('#inscricaoErro');
   form.addEventListener('submit', evento => {
     evento.preventDefault();
     const campos = form.elements;
+    const contato = validarContato(campos.contato.value);
+    if (!contato) {
+      erro.textContent = 'Informe um telefone com DDD (ex.: (69) 9 9999-9999) ou um e-mail válido.';
+      campos.contato.setAttribute('aria-invalid', 'true');
+      campos.contato.focus();
+      return;
+    }
+    campos.contato.removeAttribute('aria-invalid');
+    erro.textContent = '';
+
+    const existente = listar('inscritos').find(i => i.contato === contato.valor && i.setorId === campos.setorId.value);
     salvarItem('inscritos', {
+      id: existente?.id,
       nome: campos.nome.value.trim(),
-      contato: campos.contato.value.trim(),
+      contato: contato.valor,
+      tipoContato: contato.tipo,
       setorId: campos.setorId.value,
-      data: hojeISO()
+      data: existente?.data ?? hojeISO(),
+      consentimento: { versao: VERSAO_TERMO, data: new Date().toISOString() }
     });
     form.reset();
-    toast('Cadastro realizado! Você receberá os avisos do seu setor.');
+    toast(
+      existente
+        ? 'Seu cadastro já existia e foi atualizado.'
+        : 'Cadastro realizado! Você receberá os avisos do seu setor.'
+    );
   });
 }
 

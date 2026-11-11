@@ -1,6 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="8" fill="#1f7a4d"/>
-  <g fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 4)">
-    <path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M5 6l1 14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-14"/><path d="M10 11l2-2 2 2"/><path d="M12 9v7"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="SIGRES">
+  <rect width="32" height="32" rx="7" fill="#0f4c35"/>
+  <rect x="0" y="27" width="32" height="5" fill="#ffcd07"/>
+  <path d="M0 27h32v-1H0z" fill="#0f4c35"/>
+  <g fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 2.5)">
+    <path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M5 6l1 13a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-13"/><path d="M10 11l2-2 2 2"/><path d="M12 9v7"/>
   </g>
 </svg>

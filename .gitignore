@@ -1,0 +1,24 @@
+# Dependências
+node_modules/
+
+# Relatórios e artefatos de build
+coverage/
+dist/
+*.log
+npm-debug.log*
+
+# Editores e sistema operacional
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Arquivos locais e segredos
+.env
+.env.*
+*.local
+backup-*.json
+coleta-itapua-backup-*.json
+sigres-backup-*.json
+inscritos-*.csv

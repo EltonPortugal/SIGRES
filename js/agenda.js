@@ -23,10 +23,12 @@ export function proximaData(coleta, agora = new Date()) {
 
 /** A coleta mais próxima de um setor, entre todos os tipos de resíduo. */
 export function proximaColetaDoSetor(setorId, agora = new Date()) {
-  return coletasDoSetor(setorId)
-    .map(coleta => ({ coleta, proxima: proximaData(coleta, agora) }))
-    .filter(x => x.proxima)
-    .sort((a, b) => a.proxima.data - b.proxima.data)[0] ?? null;
+  return (
+    coletasDoSetor(setorId)
+      .map(coleta => ({ coleta, proxima: proximaData(coleta, agora) }))
+      .filter(x => x.proxima)
+      .sort((a, b) => a.proxima.data - b.proxima.data)[0] ?? null
+  );
 }
 
 export function descreverData({ data, emDias }) {

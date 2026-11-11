@@ -1,0 +1,18 @@
+name: Sugerir melhoria
+description: Nova funcionalidade ou ajuste
+title: '[Melhoria] '
+labels: [melhoria]
+body:
+  - type: textarea
+    id: problema
+    attributes:
+      label: Qual necessidade isso atende?
+      description: Quem será beneficiado (moradores, servidores, gestão)?
+    validations:
+      required: true
+  - type: textarea
+    id: proposta
+    attributes:
+      label: Proposta
+    validations:
+      required: true

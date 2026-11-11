@@ -5,6 +5,10 @@
 import { listar, buscar, salvarItem, removerItem } from '../store.js';
 import { $, toast } from '../ui.js';
 import { esc } from '../utils.js';
+import { registrar } from './auditoria.js';
+
+const ROTULOS = { setores: 'Setor', rotas: 'Rota', coletas: 'Dia de coleta', avisos: 'Aviso' };
+const descricaoPadrao = item => item.nome ?? item.titulo ?? item.id;
 
 /**
  * @param {object} opcoes
@@ -16,8 +20,19 @@ import { esc } from '../utils.js';
  * @param {(item: object) => string} opcoes.colunas   HTML das células da linha (sem a de ações).
  * @param {(item: object, novo: boolean) => string} [opcoes.mensagemSalvo]
  * @param {(id: string) => void} [opcoes.excluir]     Substitui a exclusão padrão.
+ * @param {(item: object) => string} [opcoes.descrever] Identificação do item no histórico de atividades.
  */
-export function criarCadastro({ colecao, painel, titulos, lerFormulario, preencherFormulario, colunas, mensagemSalvo, excluir }) {
+export function criarCadastro({
+  colecao,
+  painel,
+  titulos,
+  lerFormulario,
+  preencherFormulario,
+  colunas,
+  mensagemSalvo,
+  excluir,
+  descrever = descricaoPadrao
+}) {
   const form = $('form', painel);
   const tbody = $('tbody', painel);
   const titulo = $('[data-titulo]', form);
@@ -42,7 +57,9 @@ export function criarCadastro({ colecao, painel, titulos, lerFormulario, preench
 
   function excluirPadrao(id) {
     if (confirm('Confirmar exclusão?')) {
+      const item = buscar(colecao, id);
       removerItem(colecao, id);
+      registrar('excluir', `${ROTULOS[colecao]}: ${descrever(item)}`);
       toast('Registro excluído.');
     }
   }
@@ -50,9 +67,13 @@ export function criarCadastro({ colecao, painel, titulos, lerFormulario, preench
   form.addEventListener('submit', evento => {
     evento.preventDefault();
     const resultado = lerFormulario(form);
-    if (typeof resultado === 'string') { toast(resultado); return; }
+    if (typeof resultado === 'string') {
+      toast(resultado);
+      return;
+    }
     const novo = !form.elements.id.value;
     const item = salvarItem(colecao, { ...resultado, id: form.elements.id.value });
+    registrar(novo ? 'criar' : 'editar', `${ROTULOS[colecao]}: ${descrever(item)}`);
     limpar();
     toast(mensagemSalvo?.(item, novo) ?? 'Registro salvo.');
   });
@@ -74,14 +95,18 @@ export function criarCadastro({ colecao, painel, titulos, lerFormulario, preench
     if (form.elements.id.value && !buscar(colecao, form.elements.id.value)) limpar();
     const itens = listar(colecao);
     tbody.innerHTML = itens.length
-      ? itens.map(item => `
+      ? itens
+          .map(
+            item => `
           <tr data-id="${esc(item.id)}">
             ${colunas(item)}
             <td class="acoes-linha">
               <button class="btn sec pequeno" type="button" data-acao="editar">Editar</button>
               <button class="btn perigo pequeno" type="button" data-acao="excluir">Excluir</button>
             </td>
-          </tr>`).join('')
+          </tr>`
+          )
+          .join('')
       : `<tr><td colspan="${totalColunas}" class="vazio">Nenhum registro.</td></tr>`;
   }
 

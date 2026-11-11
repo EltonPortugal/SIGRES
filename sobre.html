@@ -3,31 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sobre o projeto — Coleta Itapuã</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Sobre o sistema — SIGRES | Prefeitura de Itapuã do Oeste</title>
   <meta name="description" content="Projeto de extensão para informatização e gestão do cronograma de coleta de resíduos sólidos de Itapuã do Oeste/RO: objetivos, justificativa e metodologia.">
   <link rel="icon" href="img/icone.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0f4c35">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/sobre.css">
   <script type="module" src="js/paginas/sobre.js"></script>
 </head>
 <body>
 
+<div class="barra-gov">
+  <div class="container">
+    <span><strong>Prefeitura Municipal de Itapuã do Oeste</strong> · Estado de Rondônia</span>
+    <nav aria-label="Atalhos de acessibilidade">
+      <ul>
+        <li class="atalho"><a href="#conteudo" accesskey="1">Ir para o conteúdo <kbd>1</kbd></a></li>
+        <li class="atalho"><a href="#menuPrincipal" accesskey="2">Ir para o menu <kbd>2</kbd></a></li>
+        <li class="atalho"><a href="#rodape" accesskey="4">Ir para o rodapé <kbd>4</kbd></a></li>
+        <li><a href="acessibilidade.html">Acessibilidade</a></li>
+        <li class="a11y-controles">
+          <button type="button" data-a11y="contraste" aria-pressed="false">Alto contraste</button>
+          <button type="button" data-a11y="diminuir" aria-label="Diminuir o tamanho do texto">A−</button>
+          <button type="button" data-a11y="restaurar" aria-label="Tamanho padrão do texto">A</button>
+          <button type="button" data-a11y="aumentar" aria-label="Aumentar o tamanho do texto">A+</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
 <header class="topo">
   <div class="container">
     <a href="index.html" class="marca">
-      <img src="img/icone.svg" width="36" height="36" alt="">
-      <span>Coleta Itapuã<small>Itapuã do Oeste / RO</small></span>
+      <img src="img/icone.svg" width="40" height="40" alt="">
+      <span>SIGRES<small>Coleta de Resíduos Sólidos</small></span>
     </a>
     <button class="btn-menu" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menuPrincipal">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
     </button>
-    <nav class="menu" id="menuPrincipal">
+    <nav class="menu" id="menuPrincipal" aria-label="Menu principal">
       <ul>
         <li><a href="index.html#consulta">Consultar coleta</a></li>
         <li><a href="index.html#calendario">Calendário</a></li>
         <li><a href="index.html#avisos">Avisos</a></li>
-        <li><a href="sobre.html" class="ativo" aria-current="page">O projeto</a></li>
-        <li><a href="admin.html">Área administrativa</a></li>
+        <li><a href="sobre.html" class="ativo" aria-current="page">Sobre o sistema</a></li>
+        <li><a href="admin.html">Acesso restrito</a></li>
       </ul>
     </nav>
   </div>
@@ -37,10 +61,10 @@
   Se esta mensagem não desaparecer, abra o site por um servidor local (veja o arquivo README.md).
 </div>
 
-<main class="bloco">
+<main id="conteudo" class="bloco" tabindex="-1">
   <div class="container">
-    <h1>Sobre o projeto de extensão</h1>
-    <p class="subtitulo">Informatização e gestão do cronograma de coleta de resíduos sólidos de Itapuã do Oeste/RO.</p>
+    <h1>Sobre o SIGRES</h1>
+    <p class="subtitulo">Sistema de Gestão do Cronograma de Coleta de Resíduos Sólidos de Itapuã do Oeste/RO, desenvolvido em parceria com projeto de extensão universitária.</p>
 
     <div class="grid grid-2">
       <section class="card">
@@ -80,10 +104,35 @@
   </div>
 </main>
 
-<footer>
+<footer id="rodape">
   <div class="container">
-    <p><strong>Coleta Itapuã</strong> — Projeto de Extensão · Sistema de gestão do cronograma de coleta de resíduos sólidos de Itapuã do Oeste/RO.</p>
-    <p>Os setores, ruas e horários exibidos são dados de exemplo até o cadastro das informações oficiais pela Prefeitura.</p>
+    <div class="rodape-colunas">
+      <section>
+        <h2>SIGRES</h2>
+        <p>Sistema de Gestão do Cronograma de Coleta de Resíduos Sólidos da Prefeitura Municipal de Itapuã do Oeste/RO.</p>
+      </section>
+      <section>
+        <h2>Serviços</h2>
+        <ul>
+          <li><a href="index.html#consulta">Consultar dias de coleta</a></li>
+          <li><a href="index.html#calendario">Calendário mensal</a></li>
+          <li><a href="index.html#avisos">Avisos à população</a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Institucional</h2>
+        <ul>
+          <li><a href="sobre.html">Sobre o sistema</a></li>
+          <li><a href="acessibilidade.html">Acessibilidade</a></li>
+          <li><a href="privacidade.html">Política de privacidade</a></li>
+          <li><a href="admin.html">Acesso restrito</a></li>
+        </ul>
+      </section>
+    </div>
+    <div class="rodape-base">
+      <span>Prefeitura Municipal de Itapuã do Oeste · Estado de Rondônia</span>
+      <span>Desenvolvido em parceria com projeto de extensão universitária · <span data-versao>v1.0.0</span></span>
+    </div>
   </div>
 </footer>
 

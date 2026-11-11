@@ -3,28 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Área administrativa — Coleta Itapuã</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Painel de gestão — SIGRES | Prefeitura de Itapuã do Oeste</title>
   <meta name="robots" content="noindex">
   <link rel="icon" href="img/icone.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0f4c35">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/admin.css">
   <script type="module" src="js/paginas/admin.js"></script>
 </head>
 <body class="pagina-admin">
 
+<div class="barra-gov">
+  <div class="container">
+    <span><strong>Prefeitura Municipal de Itapuã do Oeste</strong> · Estado de Rondônia</span>
+    <nav aria-label="Atalhos de acessibilidade">
+      <ul>
+        <li class="atalho"><a href="#conteudo" accesskey="1">Ir para o conteúdo <kbd>1</kbd></a></li>
+        <li class="atalho"><a href="#menuPrincipal" accesskey="2">Ir para o menu <kbd>2</kbd></a></li>
+        <li class="atalho"><a href="#rodape" accesskey="4">Ir para o rodapé <kbd>4</kbd></a></li>
+        <li><a href="acessibilidade.html">Acessibilidade</a></li>
+        <li class="a11y-controles">
+          <button type="button" data-a11y="contraste" aria-pressed="false">Alto contraste</button>
+          <button type="button" data-a11y="diminuir" aria-label="Diminuir o tamanho do texto">A−</button>
+          <button type="button" data-a11y="restaurar" aria-label="Tamanho padrão do texto">A</button>
+          <button type="button" data-a11y="aumentar" aria-label="Aumentar o tamanho do texto">A+</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
 <header class="topo">
   <div class="container">
     <a href="index.html" class="marca">
-      <img src="img/icone.svg" width="36" height="36" alt="">
-      <span>Coleta Itapuã<small>Área administrativa</small></span>
+      <img src="img/icone.svg" width="40" height="40" alt="">
+      <span>SIGRES<small>Painel de gestão</small></span>
     </a>
     <button class="btn-menu" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menuPrincipal">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
     </button>
-    <nav class="menu" id="menuPrincipal">
+    <nav class="menu" id="menuPrincipal" aria-label="Menu principal">
       <ul>
-        <li><a href="index.html">Voltar ao site</a></li>
-        <li><a href="sobre.html">O projeto</a></li>
+        <li><a href="index.html">Portal público</a></li>
+        <li><a href="sobre.html">Sobre o sistema</a></li>
       </ul>
     </nav>
   </div>
@@ -34,10 +58,10 @@
   Se esta mensagem não desaparecer, abra o site por um servidor local (veja o arquivo README.md).
 </div>
 
-<main class="bloco">
+<main id="conteudo" class="bloco" tabindex="-1">
   <div class="container">
-    <h1>Área administrativa</h1>
-    <p class="subtitulo">Cadastro de setores, rotas, dias de coleta e avisos. Uso restrito à equipe gestora.</p>
+    <h1>Painel de gestão</h1>
+    <p class="subtitulo">Cadastro de setores, rotas, dias de coleta e avisos. Uso restrito aos servidores autorizados da Prefeitura.</p>
 
     <!-- Login -->
     <section id="adminLogin" class="card login" hidden>
@@ -45,15 +69,16 @@
       <form id="formLogin">
         <div class="campo"><label for="loginUsuario">Usuário</label><input id="loginUsuario" name="usuario" type="text" autocomplete="username" required></div>
         <div class="campo"><label for="loginSenha">Senha</label><input id="loginSenha" name="senha" type="password" autocomplete="current-password" required></div>
+        <p id="loginErro" class="erro-formulario" role="alert"></p>
         <button class="btn" type="submit">Entrar</button>
       </form>
-      <p class="nota">Protótipo: usuário <strong>admin</strong> e senha <strong>admin123</strong>. Os dados ficam salvos apenas neste navegador. Para uso em produção, a autenticação e o armazenamento devem ser feitos em um servidor.</p>
+      <p class="nota">Acesso restrito aos servidores autorizados da Prefeitura. Por segurança, a sessão é encerrada após 30 minutos sem atividade e o acesso é bloqueado temporariamente após 5 tentativas incorretas.</p>
     </section>
 
     <!-- Painel -->
     <section id="adminPainel" hidden>
       <div class="barra-admin">
-        <span>Conectado como <strong>admin</strong></span>
+        <span>Conectado como <strong id="usuarioLogado"></strong></span>
         <div class="acoes">
           <button class="btn sec pequeno" type="button" id="btnExportar">Exportar backup (JSON)</button>
           <label class="btn sec pequeno">Importar backup<input type="file" accept="application/json" id="inputImportar" hidden></label>
@@ -62,16 +87,17 @@
         </div>
       </div>
 
-      <div class="abas" role="tablist">
-        <button type="button" role="tab" aria-selected="true" aria-controls="pSetores">Setores</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="pRotas">Rotas</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="pColetas">Dias de coleta</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="pAvisos">Avisos</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="pInscritos">Inscritos</button>
+      <div class="abas" role="tablist" aria-label="Cadastros">
+        <button type="button" role="tab" id="abaSetores" aria-selected="true" aria-controls="pSetores" tabindex="0">Setores</button>
+        <button type="button" role="tab" id="abaRotas" aria-selected="false" aria-controls="pRotas" tabindex="-1">Rotas</button>
+        <button type="button" role="tab" id="abaColetas" aria-selected="false" aria-controls="pColetas" tabindex="-1">Dias de coleta</button>
+        <button type="button" role="tab" id="abaAvisos" aria-selected="false" aria-controls="pAvisos" tabindex="-1">Avisos</button>
+        <button type="button" role="tab" id="abaInscritos" aria-selected="false" aria-controls="pInscritos" tabindex="-1">Inscritos</button>
+        <button type="button" role="tab" id="abaAtividades" aria-selected="false" aria-controls="pAtividades" tabindex="-1">Atividades</button>
       </div>
 
       <!-- Setores -->
-      <div class="painel" id="pSetores" role="tabpanel">
+      <div class="painel" id="pSetores" role="tabpanel" aria-labelledby="abaSetores" tabindex="0">
         <div class="grid grid-2 alinhar-topo">
           <form class="card">
             <h3 data-titulo>Novo setor</h3>
@@ -88,7 +114,7 @@
       </div>
 
       <!-- Rotas -->
-      <div class="painel" id="pRotas" role="tabpanel" hidden>
+      <div class="painel" id="pRotas" role="tabpanel" aria-labelledby="abaRotas" tabindex="0" hidden>
         <div class="grid grid-2 alinhar-topo">
           <form class="card">
             <h3 data-titulo>Nova rota</h3>
@@ -107,7 +133,7 @@
       </div>
 
       <!-- Dias de coleta -->
-      <div class="painel" id="pColetas" role="tabpanel" hidden>
+      <div class="painel" id="pColetas" role="tabpanel" aria-labelledby="abaColetas" tabindex="0" hidden>
         <div class="grid grid-2 alinhar-topo">
           <form class="card">
             <h3 data-titulo>Novo dia de coleta</h3>
@@ -132,7 +158,7 @@
       </div>
 
       <!-- Avisos -->
-      <div class="painel" id="pAvisos" role="tabpanel" hidden>
+      <div class="painel" id="pAvisos" role="tabpanel" aria-labelledby="abaAvisos" tabindex="0" hidden>
         <div class="grid grid-2 alinhar-topo">
           <form class="card">
             <h3 data-titulo>Novo aviso</h3>
@@ -154,7 +180,7 @@
       </div>
 
       <!-- Inscritos -->
-      <div class="painel" id="pInscritos" role="tabpanel" hidden>
+      <div class="painel" id="pInscritos" role="tabpanel" aria-labelledby="abaInscritos" tabindex="0" hidden>
         <div class="card">
           <div class="barra-admin">
             <h3>Moradores inscritos para receber avisos</h3>
@@ -164,9 +190,30 @@
           <div class="tabela-wrap"><table><thead><tr><th>Nome</th><th>Contato</th><th>Setor</th><th>Data</th><th><span class="sr-only">Ações</span></th></tr></thead><tbody id="tbInscritos"></tbody></table></div>
         </div>
       </div>
+
+      <!-- Atividades (auditoria) -->
+      <div class="painel" id="pAtividades" role="tabpanel" aria-labelledby="abaAtividades" tabindex="0" hidden>
+        <div class="card">
+          <div class="barra-admin">
+            <h3>Histórico de atividades</h3>
+            <button class="btn sec pequeno" type="button" id="btnExportarAuditoria">Exportar CSV</button>
+          </div>
+          <p class="nota">Registro das ações realizadas no painel (cadastros, alterações, exclusões, importações e acessos), para conferência e prestação de contas. São exibidas as 200 mais recentes.</p>
+          <div class="tabela-wrap"><table><thead><tr><th>Data e hora</th><th>Usuário</th><th>Ação</th><th>Descrição</th></tr></thead><tbody id="tbAuditoria"></tbody></table></div>
+        </div>
+      </div>
     </section>
   </div>
 </main>
+
+<footer id="rodape">
+  <div class="container">
+    <div class="rodape-base">
+      <span>Prefeitura Municipal de Itapuã do Oeste · Estado de Rondônia</span>
+      <span>SIGRES · <span data-versao>v1.0.0</span></span>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>

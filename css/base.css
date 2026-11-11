@@ -2,27 +2,33 @@
    Base: variáveis, tipografia, layout e componentes comuns
    ========================================================= */
 :root {
-  --verde: #1f7a4d;
-  --verde-escuro: #155c39;
-  --verde-claro: #e7f4ec;
-  --azul: #1d5fa8;
-  --amarelo: #e0a100;
-  --vermelho: #c0392b;
-  --texto: #1f2a24;
-  --texto-suave: #5b6b62;
-  --fundo: #f6f8f7;
+  /* Paleta institucional */
+  --verde: #17694a;
+  --verde-escuro: #0f4c35;
+  --verde-claro: #e6f2ec;
+  --azul: #1351b4;
+  --azul-escuro: #0c326f;
+  --amarelo: #ffcd07;
+  --amarelo-texto: #7a5c00;
+  --vermelho: #b3261e;
+  --texto: #1b1f1d;
+  --texto-suave: #4f5b55;
+  --fundo: #f4f6f5;
   --card: #ffffff;
-  --borda: #dde5e0;
-  --sombra: 0 2px 10px rgba(20, 50, 35, .08);
-  --raio: 12px;
-  --altura-topo: 64px;
+  --borda: #d3ddd8;
+  --foco: #c2850c;
+  --sombra: 0 1px 3px rgba(15, 40, 28, .08), 0 4px 14px rgba(15, 40, 28, .06);
+  --raio: 8px;
+  --altura-topo: 72px;
+  --fonte: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: var(--fonte);
+  font-size: 1rem;
   color: var(--texto);
   background: var(--fundo);
   line-height: 1.55;
@@ -35,21 +41,39 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; }
 .texto-suave { color: var(--texto-suave); margin-top: 0; }
 .vazio { color: var(--texto-suave); font-style: italic; }
 
+/* ---------- Barra institucional ---------- */
+.barra-gov { background: #fff; border-bottom: 1px solid var(--borda); font-size: .8rem; color: var(--texto-suave); }
+.barra-gov .container { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 32px; flex-wrap: wrap; }
+.barra-gov strong { color: var(--texto); font-weight: 600; }
+.barra-gov nav { margin-left: auto; }
+.barra-gov ul { list-style: none; display: flex; align-items: center; gap: 4px 14px; margin: 0; padding: 0; flex-wrap: wrap; justify-content: flex-end; }
+.barra-gov a { color: var(--azul); text-decoration: none; }
+.barra-gov a:hover { text-decoration: underline; }
+.barra-gov kbd { display: inline-block; min-width: 1.4em; padding: 0 4px; margin-left: 2px; border: 1px solid var(--borda); border-radius: 3px; font: inherit; font-size: .72rem; text-align: center; background: var(--fundo); color: var(--texto); }
+.a11y-controles { display: flex; gap: 2px; }
+.a11y-controles button { background: none; border: 1px solid transparent; border-radius: 4px; color: var(--azul); font: inherit; padding: 2px 6px; cursor: pointer; }
+.a11y-controles button:hover, .a11y-controles button[aria-pressed="true"] { border-color: var(--azul); }
+main:focus { outline: none; }
+
 /* ---------- Cabeçalho e menu ---------- */
 .topo {
   background: var(--verde-escuro);
+  border-bottom: 4px solid var(--amarelo);
   color: #fff;
   position: sticky; top: 0; z-index: 50;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
 }
 .topo .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: var(--altura-topo); }
-.marca { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 700; }
-.marca img { flex: none; border-radius: 8px; box-shadow: 0 0 0 1px rgba(255, 255, 255, .3); }
-.marca small { display: block; font-weight: 400; opacity: .8; font-size: .75rem; }
+.marca { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font-weight: 700; font-size: 1.15rem; letter-spacing: .02em; }
+.marca img { flex: none; }
+.marca small { display: block; font-weight: 400; opacity: .9; font-size: .78rem; letter-spacing: 0; }
 .menu ul { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; flex-wrap: wrap; }
 .menu a { color: #fff; text-decoration: none; padding: 8px 12px; border-radius: 8px; font-size: .95rem; display: block; }
 .menu a:hover, .menu a.ativo { background: rgba(255, 255, 255, .15); }
 .btn-menu { display: none; background: none; border: 1px solid rgba(255, 255, 255, .4); color: #fff; border-radius: 8px; padding: 6px 10px; font-size: 1.1rem; cursor: pointer; }
+
+/* Faixa de ambiente de demonstração (AMBIENTE !== 'producao') */
+.faixa-homologacao { background: #fff4c2; color: #4d3b00; border-bottom: 1px solid #e6cf73; font-size: .88rem; padding: 8px 0; }
 
 /* Mensagem exibida só se os módulos JS não carregarem (ex.: aberto via file://) */
 .aviso-carregamento {
@@ -76,9 +100,13 @@ fieldset { border: none; padding: 0; margin: 0 0 14px; min-width: 0; }
 input[type=text], input[type=password], input[type=date], input[type=time], select, textarea {
   width: 100%; padding: 10px 12px; border: 1px solid var(--borda); border-radius: 8px; font: inherit; background: #fff; color: var(--texto);
 }
-input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible { outline: 2px solid #9fd3b5; outline-offset: 1px; }
+a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid var(--foco); outline-offset: 2px;
+}
 textarea { min-height: 90px; resize: vertical; }
 .campo { margin-bottom: 14px; }
+.erro-formulario { color: var(--vermelho); font-weight: 600; font-size: .9rem; margin: 0 0 10px; }
+.erro-formulario:empty { display: none; }
 .linha { display: flex; gap: 12px; flex-wrap: wrap; }
 .linha > .campo { flex: 1 1 200px; }
 .linha > .campo-largo { flex: 3 1 280px; }
@@ -86,7 +114,7 @@ textarea { min-height: 90px; resize: vertical; }
 
 /* ---------- Botões ---------- */
 .btn {
-  display: inline-flex; align-items: center; gap: 6px; border: none; border-radius: 8px; padding: 10px 16px;
+  display: inline-flex; align-items: center; gap: 6px; border: none; border-radius: 6px; padding: 10px 16px;
   font: inherit; font-weight: 600; cursor: pointer; background: var(--verde); color: #fff; text-decoration: none; margin: 0;
 }
 .btn:hover { background: var(--verde-escuro); }
@@ -119,12 +147,22 @@ td.acoes-linha { white-space: nowrap; }
 .toast.mostrar { transform: translateX(-50%) translateY(0); }
 
 /* ---------- Rodapé ---------- */
-footer { background: var(--verde-escuro); color: #d8eadf; padding: 28px 0; font-size: .9rem; }
+footer { background: var(--verde-escuro); color: #e3efe8; font-size: .9rem; border-top: 4px solid var(--amarelo); }
 footer p { margin: 0 0 6px; }
 footer a { color: #fff; }
+.rodape-colunas { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; padding: 32px 0 24px; }
+.rodape-colunas h2 { font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: #fff; margin-bottom: 10px; }
+.rodape-colunas ul { list-style: none; margin: 0; padding: 0; }
+.rodape-colunas li { margin-bottom: 6px; }
+.rodape-base { border-top: 1px solid rgba(255, 255, 255, .2); padding: 14px 0; font-size: .8rem; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
 /* ---------- Responsivo ---------- */
 @media (max-width: 820px) {
+  /* No celular, os atalhos de teclado só aparecem ao receber foco */
+  .barra-gov .atalho:not(:focus-within) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .barra-gov .container > span { flex-basis: 100%; }
+  .barra-gov nav { margin-left: 0; }
+  .barra-gov ul { justify-content: flex-start; }
   .btn-menu { display: block; }
   .menu { position: absolute; top: var(--altura-topo); left: 0; right: 0; background: var(--verde-escuro); display: none; padding: 8px 16px 16px; }
   .menu.aberto { display: block; }
@@ -135,3 +173,19 @@ footer a { color: #fff; }
   html { scroll-behavior: auto; }
   .toast { transition: none; }
 }
+
+/* ---------- Alto contraste (ativado pela barra de acessibilidade) ---------- */
+.alto-contraste {
+  --verde: #ffff00; --verde-escuro: #000; --verde-claro: #000; --azul: #ffff00; --vermelho: #ff6b6b;
+  --texto: #fff; --texto-suave: #fff; --fundo: #000; --card: #000; --borda: #fff; --foco: #00ffff; --sombra: none;
+}
+.alto-contraste body, .alto-contraste .bloco-claro, .alto-contraste .pagina-admin, .alto-contraste .barra-gov,
+.alto-contraste .hero, .alto-contraste input, .alto-contraste select, .alto-contraste textarea,
+.alto-contraste .calendario .dia, .alto-contraste .nota, .alto-contraste .faixa-homologacao, .alto-contraste th {
+  background: #000 !important; color: #fff !important; border-color: #fff !important;
+}
+.alto-contraste a, .alto-contraste .barra-gov a, .alto-contraste .a11y-controles button { color: #ffff00 !important; }
+.alto-contraste .btn { background: #000 !important; color: #ffff00 !important; border: 2px solid #ffff00 !important; }
+.alto-contraste .selo, .alto-contraste .setor-tag { background: #000 !important; color: #fff !important; border: 1px solid #fff; }
+.alto-contraste img { filter: grayscale(1) contrast(1.5); }
+.alto-contraste .toast { background: #000; color: #fff; border: 2px solid #ffff00; }

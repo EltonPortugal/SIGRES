@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>SIGRES — Cronograma de Coleta de Resíduos | Prefeitura de Itapuã do Oeste</title>
   <meta name="description" content="Consulta pública do cronograma de coleta de resíduos sólidos de Itapuã do Oeste/RO: dias de coleta por bairro, calendário e avisos à população.">
   <link rel="icon" href="img/icone.svg" type="image/svg+xml">
@@ -137,14 +139,15 @@
           <p class="texto-suave">Cadastre-se para ser avisado por WhatsApp/SMS ou e-mail quando houver mudanças na coleta do seu setor.</p>
           <form id="formInscricao">
             <div class="campo"><label for="insNome">Nome</label><input id="insNome" name="nome" type="text" required maxlength="80" autocomplete="name"></div>
-            <div class="campo"><label for="insContato">WhatsApp, telefone ou e-mail</label><input id="insContato" name="contato" type="text" required maxlength="80" placeholder="(69) 9 0000-0000"></div>
+            <div class="campo"><label for="insContato">WhatsApp, telefone ou e-mail</label><input id="insContato" name="contato" type="text" required maxlength="80" placeholder="(69) 9 0000-0000" autocomplete="tel" aria-describedby="inscricaoErro"></div>
             <div class="campo"><label for="insSetor">Seu setor / bairro</label><select id="insSetor" name="setorId" required></select></div>
             <div class="campo">
               <label class="consentimento">
                 <input type="checkbox" name="consentimento" required>
-                <span>Autorizo o uso destes dados apenas para o envio de avisos sobre a coleta de resíduos (LGPD).</span>
+                <span>Li a <a href="privacidade.html" target="_blank" rel="noopener">política de privacidade</a> e autorizo o uso destes dados apenas para o envio de avisos sobre a coleta de resíduos (LGPD, art. 7º, I).</span>
               </label>
             </div>
+            <p id="inscricaoErro" class="erro-formulario" role="alert"></p>
             <button class="btn" type="submit">Cadastrar</button>
           </form>
         </div>
@@ -173,6 +176,7 @@
         <ul>
           <li><a href="sobre.html">Sobre o sistema</a></li>
           <li><a href="acessibilidade.html">Acessibilidade</a></li>
+          <li><a href="privacidade.html">Política de privacidade</a></li>
           <li><a href="admin.html">Acesso restrito</a></li>
         </ul>
       </section>

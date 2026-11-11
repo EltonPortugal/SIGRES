@@ -42,3 +42,24 @@ export function linhas(texto) {
     .map(l => l.trim())
     .filter(Boolean);
 }
+
+/**
+ * Valida e normaliza o contato informado na inscrição.
+ * Aceita e-mail ou telefone brasileiro com DDD (fixo ou celular, com ou sem +55).
+ * @returns {{tipo: 'email'|'telefone', valor: string} | null}
+ */
+export function validarContato(texto) {
+  const valor = String(texto ?? '').trim();
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(valor)) return { tipo: 'email', valor: valor.toLowerCase() };
+  const digitos = valor.replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '');
+  if (/^[1-9]{2}9?\d{8}$/.test(digitos)) return { tipo: 'telefone', valor: digitos };
+  return null;
+}
+
+/** Formata telefone (só dígitos, com DDD) como (69) 9 9999-9999 ou (69) 3333-4444. */
+export function formatarTelefone(digitos) {
+  const d = String(digitos ?? '');
+  if (d.length === 11) return `(${d.slice(0, 2)}) ${d[2]} ${d.slice(3, 7)}-${d.slice(7)}`;
+  if (d.length === 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+  return d;
+}

@@ -3,7 +3,8 @@
 import { avisosAtivos } from '../agenda.js';
 import { listar, buscar, removerItem } from '../store.js';
 import { $, toast, baixarArquivo } from '../ui.js';
-import { esc, dataBR } from '../utils.js';
+import { esc, dataBR, formatarTelefone, hojeISO } from '../utils.js';
+import { registrar } from './auditoria.js';
 
 export function iniciarInscritos() {
   $('#btnExportarCSV').addEventListener('click', exportarCSV);
@@ -13,7 +14,9 @@ export function iniciarInscritos() {
     const id = botao.closest('tr').dataset.id;
     if (botao.dataset.acao === 'mensagem') enviarWhatsApp(id);
     if (botao.dataset.acao === 'excluir' && confirm('Remover este inscrito?')) {
+      const inscrito = buscar('inscritos', id);
       removerItem('inscritos', id);
+      registrar('excluir', `Inscrito: ${inscrito.nome}`);
       toast('Inscrito removido.');
     }
   });
@@ -27,7 +30,7 @@ export function renderInscritos() {
           i => `
         <tr data-id="${esc(i.id)}">
           <td>${esc(i.nome)}</td>
-          <td>${esc(i.contato)}</td>
+          <td>${esc(i.tipoContato === 'telefone' ? formatarTelefone(i.contato) : i.contato)}</td>
           <td>${esc(buscar('setores', i.setorId)?.nome ?? '—')}</td>
           <td>${dataBR(i.data)}</td>
           <td class="acoes-linha">
@@ -55,6 +58,12 @@ function enviarWhatsApp(id) {
 }
 
 function exportarCSV() {
+  if (
+    !confirm(
+      'A lista contém dados pessoais protegidos pela LGPD. Use-a apenas para o envio de avisos da coleta e não a compartilhe. Continuar?'
+    )
+  )
+    return;
   const celula = valor => `"${String(valor).replace(/"/g, '""')}"`;
   const linhas = [
     ['Nome', 'Contato', 'Setor', 'Data'],
@@ -62,5 +71,6 @@ function exportarCSV() {
   ];
   // BOM + ";" para o Excel em português abrir com acentos e colunas corretas.
   const csv = '﻿' + linhas.map(l => l.map(celula).join(';')).join('\r\n');
-  baixarArquivo('inscritos-coleta.csv', csv, 'text/csv;charset=utf-8');
+  baixarArquivo(`sigres-inscritos-${hojeISO()}.csv`, csv, 'text/csv;charset=utf-8');
+  registrar('exportar', `Lista de inscritos (${linhas.length - 1} registro(s))`);
 }

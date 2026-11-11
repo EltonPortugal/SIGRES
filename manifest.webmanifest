@@ -1,0 +1,11 @@
+{
+  "name": "SIGRES — Coleta de Resíduos de Itapuã do Oeste",
+  "short_name": "SIGRES",
+  "description": "Consulta pública do cronograma de coleta de resíduos sólidos de Itapuã do Oeste/RO.",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4f6f5",
+  "theme_color": "#0f4c35",
+  "icons": [{ "src": "img/icone.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

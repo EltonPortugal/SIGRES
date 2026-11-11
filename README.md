@@ -170,5 +170,5 @@ está em [docs/ARQUITETURA.md](docs/ARQUITETURA.md#evolu%C3%A7%C3%A3o-para-servi
 
 ## Créditos
 
-Desenvolvido por **Elton Portugal** ([@EltonPortugal](https://github.com/EltonPortugal)) no âmbito de projeto de extensão
+Desenvolvido por **Forge Tech: Elton Portugal, Rodrigo Eloi, Ricardo Prestes, Érick Vinícius, Eduardo Barros, Eduardo Belfort, Rogério Avelino, Matheus Januário** ([@EltonPortugal](https://github.com/EltonPortugal)) no âmbito de projeto de extensão
 universitária, em parceria com a Prefeitura Municipal de Itapuã do Oeste/RO.

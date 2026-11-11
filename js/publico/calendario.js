@@ -34,21 +34,26 @@ export function renderCalendario() {
   const ano = mesExibido.getFullYear();
   const mes = mesExibido.getMonth();
   const titulo = mesExibido.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+  const nomeMes = mesExibido.toLocaleDateString('pt-BR', { month: 'long' });
   $('#calTitulo').textContent = titulo[0].toUpperCase() + titulo.slice(1);
 
   const primeiroDiaSemana = new Date(ano, mes, 1).getDay();
   const totalDias = new Date(ano, mes + 1, 0).getDate();
   const hoje = new Date().toDateString();
 
-  const celulas = DIAS_CURTO.map(d => `<div class="cab">${d}</div>`);
-  for (let i = 0; i < primeiroDiaSemana; i++) celulas.push('<div class="dia fora"></div>');
+  const celulas = DIAS_CURTO.map(d => `<div class="cab" aria-hidden="true">${d}</div>`);
+  for (let i = 0; i < primeiroDiaSemana; i++) celulas.push('<div class="dia fora" aria-hidden="true"></div>');
   for (let dia = 1; dia <= totalDias; dia++) {
     const data = new Date(ano, mes, dia);
     const doDia = coletas.filter(c => c.dias.includes(data.getDay()));
+    const descricao = doDia.length
+      ? doDia.map(c => `${TIPOS_RESIDUO[c.tipo].nome}, das ${c.inicio} às ${c.fim}`).join('; ')
+      : 'sem coleta';
     celulas.push(`
-      <div class="dia${data.toDateString() === hoje ? ' hoje' : ''}">
-        <span class="num">${dia}</span>
-        <div class="marcas">${doDia.map(marcaColeta).join('')}</div>
+      <div class="dia${data.toDateString() === hoje ? ' hoje' : ''}" role="listitem">
+        <span class="num" aria-hidden="true">${dia}</span>
+        <span class="sr-only">${dia} de ${nomeMes}${data.toDateString() === hoje ? ' (hoje)' : ''}: ${esc(descricao)}</span>
+        <div class="marcas" aria-hidden="true">${doDia.map(marcaColeta).join('')}</div>
       </div>`);
   }
   $('#calGrade').innerHTML = celulas.join('');

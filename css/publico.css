@@ -13,6 +13,7 @@
   margin-top: 24px; display: flex; gap: 8px; max-width: 620px; background: #fff; padding: 6px; border-radius: 12px;
   box-shadow: 0 6px 24px rgba(0, 0, 0, .15);
 }
+.busca-hero:focus-within { outline: 3px solid var(--amarelo); outline-offset: 2px; }
 .busca-hero input { flex: 1; border: none; font-size: 1rem; padding: 10px 12px; outline: none; min-width: 0; color: var(--texto); }
 
 /* ---------- Resultado da consulta ---------- */

@@ -17,6 +17,21 @@
 <div class="barra-gov">
   <div class="container">
     <span><strong>Prefeitura Municipal de Itapuã do Oeste</strong> · Estado de Rondônia</span>
+    <nav aria-label="Atalhos de acessibilidade">
+      <ul>
+        <li><a href="#conteudo" accesskey="1">Ir para o conteúdo <kbd>1</kbd></a></li>
+        <li><a href="#menuPrincipal" accesskey="2">Ir para o menu <kbd>2</kbd></a></li>
+        <li><a href="#buscaHero" accesskey="3">Ir para a busca <kbd>3</kbd></a></li>
+        <li><a href="#rodape" accesskey="4">Ir para o rodapé <kbd>4</kbd></a></li>
+        <li><a href="acessibilidade.html">Acessibilidade</a></li>
+        <li class="a11y-controles">
+          <button type="button" data-a11y="contraste" aria-pressed="false">Alto contraste</button>
+          <button type="button" data-a11y="diminuir" aria-label="Diminuir o tamanho do texto">A−</button>
+          <button type="button" data-a11y="restaurar" aria-label="Tamanho padrão do texto">A</button>
+          <button type="button" data-a11y="aumentar" aria-label="Aumentar o tamanho do texto">A+</button>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>
 
@@ -45,13 +60,13 @@
   Se esta mensagem não desaparecer, abra o site por um servidor local (veja o arquivo README.md).
 </div>
 
-<main>
+<main id="conteudo" tabindex="-1">
   <div class="hero">
     <div class="container">
       <h1>Saiba quando o caminhão da coleta passa na sua rua</h1>
       <p>Consulte os dias e horários da coleta de resíduos do seu bairro em Itapuã do Oeste, veja o calendário do mês e receba avisos da Prefeitura sobre mudanças no serviço.</p>
       <form class="busca-hero" id="formHero" role="search">
-        <input name="q" type="text" list="listaSugestoes" placeholder="Digite seu bairro ou rua (ex.: Centro, Rua das Flores)" aria-label="Bairro ou endereço">
+        <input id="buscaHero" name="q" type="text" list="listaSugestoes" placeholder="Digite seu bairro ou rua (ex.: Centro, Rua das Flores)" aria-label="Bairro ou endereço">
         <button class="btn" type="submit">Consultar</button>
       </form>
     </div>
@@ -98,7 +113,7 @@
           </div>
           <button class="btn sec pequeno" type="button" id="calImprimir">Imprimir</button>
         </div>
-        <div id="calGrade" class="calendario"></div>
+        <div id="calGrade" class="calendario" role="list" aria-labelledby="calTitulo"></div>
         <div id="calLegenda" class="legenda"></div>
       </div>
     </div>
@@ -138,7 +153,7 @@
   </section>
 </main>
 
-<footer>
+<footer id="rodape">
   <div class="container">
     <div class="rodape-colunas">
       <section>
@@ -157,6 +172,7 @@
         <h2>Institucional</h2>
         <ul>
           <li><a href="sobre.html">Sobre o sistema</a></li>
+          <li><a href="acessibilidade.html">Acessibilidade</a></li>
           <li><a href="admin.html">Acesso restrito</a></li>
         </ul>
       </section>

@@ -119,5 +119,5 @@ async function main() {
 
 main().catch(erro => {
   console.error(erro);
-  toast('Não foi possível carregar a área administrativa.');
+  toast('Não foi possível carregar o painel de gestão.');
 });

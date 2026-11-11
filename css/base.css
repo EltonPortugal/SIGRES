@@ -48,6 +48,8 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; }
 .barra-gov ul { list-style: none; display: flex; gap: 16px; margin: 0; padding: 0; flex-wrap: wrap; }
 .barra-gov a { color: var(--azul); text-decoration: none; }
 .barra-gov a:hover { text-decoration: underline; }
+.barra-gov kbd { display: inline-block; min-width: 1.4em; padding: 0 4px; margin-left: 2px; border: 1px solid var(--borda); border-radius: 3px; font: inherit; font-size: .72rem; text-align: center; background: var(--fundo); color: var(--texto); }
+main:focus { outline: none; }
 
 /* ---------- Cabeçalho e menu ---------- */
 .topo {
@@ -94,7 +96,9 @@ fieldset { border: none; padding: 0; margin: 0 0 14px; min-width: 0; }
 input[type=text], input[type=password], input[type=date], input[type=time], select, textarea {
   width: 100%; padding: 10px 12px; border: 1px solid var(--borda); border-radius: 8px; font: inherit; background: #fff; color: var(--texto);
 }
-input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible { outline: 2px solid #9fd3b5; outline-offset: 1px; }
+a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid var(--foco); outline-offset: 2px;
+}
 textarea { min-height: 90px; resize: vertical; }
 .campo { margin-bottom: 14px; }
 .linha { display: flex; gap: 12px; flex-wrap: wrap; }

@@ -5,7 +5,7 @@
 # SIGRES
 
 **Sistema de Gestão do Cronograma de Coleta de Resíduos Sólidos**
-Prefeitura Municipal de Itapuã do Oeste — Rondônia
+Prefeitura Municipal de Itapuã do Oeste - Rondônia
 
 [![CI](https://github.com/EltonPortugal/SIGRES/actions/workflows/ci.yml/badge.svg)](https://github.com/EltonPortugal/SIGRES/actions/workflows/ci.yml)
 ![Versão](https://img.shields.io/badge/vers%C3%A3o-1.0.0-0f4c35)

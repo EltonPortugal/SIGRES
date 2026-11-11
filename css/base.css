@@ -45,7 +45,8 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; }
 .barra-gov { background: #fff; border-bottom: 1px solid var(--borda); font-size: .8rem; color: var(--texto-suave); }
 .barra-gov .container { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 32px; flex-wrap: wrap; }
 .barra-gov strong { color: var(--texto); font-weight: 600; }
-.barra-gov ul { list-style: none; display: flex; gap: 16px; margin: 0; padding: 0; flex-wrap: wrap; }
+.barra-gov nav { margin-left: auto; }
+.barra-gov ul { list-style: none; display: flex; align-items: center; gap: 4px 14px; margin: 0; padding: 0; flex-wrap: wrap; justify-content: flex-end; }
 .barra-gov a { color: var(--azul); text-decoration: none; }
 .barra-gov a:hover { text-decoration: underline; }
 .barra-gov kbd { display: inline-block; min-width: 1.4em; padding: 0 4px; margin-left: 2px; border: 1px solid var(--borda); border-radius: 3px; font: inherit; font-size: .72rem; text-align: center; background: var(--fundo); color: var(--texto); }
@@ -157,6 +158,11 @@ footer a { color: #fff; }
 
 /* ---------- Responsivo ---------- */
 @media (max-width: 820px) {
+  /* No celular, os atalhos de teclado só aparecem ao receber foco */
+  .barra-gov .atalho:not(:focus-within) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .barra-gov .container > span { flex-basis: 100%; }
+  .barra-gov nav { margin-left: 0; }
+  .barra-gov ul { justify-content: flex-start; }
   .btn-menu { display: block; }
   .menu { position: absolute; top: var(--altura-topo); left: 0; right: 0; background: var(--verde-escuro); display: none; padding: 8px 16px 16px; }
   .menu.aberto { display: block; }
@@ -182,3 +188,4 @@ footer a { color: #fff; }
 .alto-contraste .btn { background: #000 !important; color: #ffff00 !important; border: 2px solid #ffff00 !important; }
 .alto-contraste .selo, .alto-contraste .setor-tag { background: #000 !important; color: #fff !important; border: 1px solid #fff; }
 .alto-contraste img { filter: grayscale(1) contrast(1.5); }
+.alto-contraste .toast { background: #000; color: #fff; border: 2px solid #ffff00; }

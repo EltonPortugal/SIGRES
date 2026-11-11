@@ -69,15 +69,16 @@
       <form id="formLogin">
         <div class="campo"><label for="loginUsuario">Usuário</label><input id="loginUsuario" name="usuario" type="text" autocomplete="username" required></div>
         <div class="campo"><label for="loginSenha">Senha</label><input id="loginSenha" name="senha" type="password" autocomplete="current-password" required></div>
+        <p id="loginErro" class="erro-formulario" role="alert"></p>
         <button class="btn" type="submit">Entrar</button>
       </form>
-      <p class="nota">Protótipo: usuário <strong>admin</strong> e senha <strong>admin123</strong>. Os dados ficam salvos apenas neste navegador. Para uso em produção, a autenticação e o armazenamento devem ser feitos em um servidor.</p>
+      <p class="nota">Acesso restrito aos servidores autorizados da Prefeitura. Por segurança, a sessão é encerrada após 30 minutos sem atividade e o acesso é bloqueado temporariamente após 5 tentativas incorretas.</p>
     </section>
 
     <!-- Painel -->
     <section id="adminPainel" hidden>
       <div class="barra-admin">
-        <span>Conectado como <strong>admin</strong></span>
+        <span>Conectado como <strong id="usuarioLogado"></strong></span>
         <div class="acoes">
           <button class="btn sec pequeno" type="button" id="btnExportar">Exportar backup (JSON)</button>
           <label class="btn sec pequeno">Importar backup<input type="file" accept="application/json" id="inputImportar" hidden></label>

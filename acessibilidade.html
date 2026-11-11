@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acessibilidade — SIGRES | Prefeitura de Itapuã do Oeste</title>
+  <meta name="description" content="Recursos de acessibilidade do SIGRES: atalhos de teclado, alto contraste e ajuste do tamanho do texto.">
+  <link rel="icon" href="img/icone.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0f4c35">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/sobre.css">
+  <script type="module" src="js/paginas/estatica.js"></script>
+</head>
+<body>
+
+<div class="barra-gov">
+  <div class="container">
+    <span><strong>Prefeitura Municipal de Itapuã do Oeste</strong> · Estado de Rondônia</span>
+    <nav aria-label="Atalhos de acessibilidade">
+      <ul>
+        <li><a href="#conteudo" accesskey="1">Ir para o conteúdo <kbd>1</kbd></a></li>
+        <li><a href="#menuPrincipal" accesskey="2">Ir para o menu <kbd>2</kbd></a></li>
+        <li><a href="#rodape" accesskey="4">Ir para o rodapé <kbd>4</kbd></a></li>
+        <li><a href="acessibilidade.html">Acessibilidade</a></li>
+        <li class="a11y-controles">
+          <button type="button" data-a11y="contraste" aria-pressed="false">Alto contraste</button>
+          <button type="button" data-a11y="diminuir" aria-label="Diminuir o tamanho do texto">A−</button>
+          <button type="button" data-a11y="restaurar" aria-label="Tamanho padrão do texto">A</button>
+          <button type="button" data-a11y="aumentar" aria-label="Aumentar o tamanho do texto">A+</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<header class="topo">
+  <div class="container">
+    <a href="index.html" class="marca">
+      <img src="img/icone.svg" width="40" height="40" alt="">
+      <span>SIGRES<small>Coleta de Resíduos Sólidos</small></span>
+    </a>
+    <button class="btn-menu" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menuPrincipal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <nav class="menu" id="menuPrincipal" aria-label="Menu principal">
+      <ul>
+        <li><a href="index.html#consulta">Consultar coleta</a></li>
+        <li><a href="index.html#calendario">Calendário</a></li>
+        <li><a href="index.html#avisos">Avisos</a></li>
+        <li><a href="sobre.html">Sobre o sistema</a></li>
+        <li><a href="admin.html">Acesso restrito</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="aviso-carregamento container" data-aviso-carregamento>
+  Se esta mensagem não desaparecer, abra o site por um servidor local (veja o arquivo README.md).
+</div>
+
+<main id="conteudo" class="bloco" tabindex="-1">
+  <div class="container texto-institucional">
+    <h1>Acessibilidade</h1>
+    <p class="subtitulo">Compromisso do SIGRES com o acesso de todas as pessoas à informação sobre a coleta de resíduos.</p>
+
+    <section class="card">
+      <h2>Declaração de acessibilidade</h2>
+      <p>Este portal foi desenvolvido seguindo as recomendações do <strong>Modelo de Acessibilidade em Governo Eletrônico (eMAG 3.1)</strong> e das <strong>Diretrizes de Acessibilidade para Conteúdo Web (WCAG 2.1, nível AA)</strong>, em atendimento à Lei Brasileira de Inclusão da Pessoa com Deficiência (Lei nº 13.146/2015) e ao Decreto nº 5.296/2004.</p>
+      <p>Entre os recursos disponíveis estão: navegação completa pelo teclado, atalhos de acesso rápido, modo de alto contraste, ajuste do tamanho do texto, textos alternativos para elementos visuais, descrição textual do calendário de coleta para leitores de tela e layout adaptável a celulares.</p>
+    </section>
+
+    <section class="card">
+      <h2>Atalhos de teclado</h2>
+      <p>Os atalhos funcionam em todas as páginas. A combinação de teclas varia conforme o navegador:</p>
+      <ul class="lista">
+        <li><strong>Chrome, Edge e Opera:</strong> <kbd>Alt</kbd> + número</li>
+        <li><strong>Firefox:</strong> <kbd>Alt</kbd> + <kbd>Shift</kbd> + número</li>
+        <li><strong>Safari (macOS):</strong> <kbd>Control</kbd> + <kbd>Option</kbd> + número</li>
+      </ul>
+      <table>
+        <thead><tr><th>Tecla</th><th>Destino</th></tr></thead>
+        <tbody>
+          <tr><td><kbd>1</kbd></td><td>Ir para o conteúdo principal</td></tr>
+          <tr><td><kbd>2</kbd></td><td>Ir para o menu principal</td></tr>
+          <tr><td><kbd>3</kbd></td><td>Ir para a busca (página inicial)</td></tr>
+          <tr><td><kbd>4</kbd></td><td>Ir para o rodapé</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Alto contraste e tamanho do texto</h2>
+      <p>Use os botões <strong>Alto contraste</strong>, <strong>A−</strong>, <strong>A</strong> e <strong>A+</strong> na barra superior. A escolha fica salva no seu navegador. Também é possível usar o zoom do navegador (<kbd>Ctrl</kbd> + <kbd>+</kbd> / <kbd>Ctrl</kbd> + <kbd>−</kbd>).</p>
+    </section>
+
+    <section class="card">
+      <h2>Encontrou alguma barreira?</h2>
+      <p>Se você teve dificuldade para acessar alguma informação deste portal, procure a Prefeitura Municipal de Itapuã do Oeste pelos canais oficiais de atendimento ao cidadão (Ouvidoria). Sua contribuição nos ajuda a melhorar o serviço.</p>
+    </section>
+  </div>
+</main>
+
+<footer id="rodape">
+  <div class="container">
+    <div class="rodape-colunas">
+      <section>
+        <h2>SIGRES</h2>
+        <p>Sistema de Gestão do Cronograma de Coleta de Resíduos Sólidos da Prefeitura Municipal de Itapuã do Oeste/RO.</p>
+      </section>
+      <section>
+        <h2>Serviços</h2>
+        <ul>
+          <li><a href="index.html#consulta">Consultar dias de coleta</a></li>
+          <li><a href="index.html#calendario">Calendário mensal</a></li>
+          <li><a href="index.html#avisos">Avisos à população</a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Institucional</h2>
+        <ul>
+          <li><a href="sobre.html">Sobre o sistema</a></li>
+          <li><a href="acessibilidade.html">Acessibilidade</a></li>
+          <li><a href="admin.html">Acesso restrito</a></li>
+        </ul>
+      </section>
+    </div>
+    <div class="rodape-base">
+      <span>Prefeitura Municipal de Itapuã do Oeste · Estado de Rondônia</span>
+      <span>Desenvolvido em parceria com projeto de extensão universitária · <span data-versao>v1.0.0</span></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

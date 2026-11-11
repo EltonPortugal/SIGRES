@@ -3,7 +3,7 @@
 import { avisosAtivos } from '../agenda.js';
 import { listar, buscar, removerItem } from '../store.js';
 import { $, toast, baixarArquivo } from '../ui.js';
-import { esc, dataBR } from '../utils.js';
+import { esc, dataBR, formatarTelefone } from '../utils.js';
 import { registrar } from './auditoria.js';
 
 export function iniciarInscritos() {
@@ -30,7 +30,7 @@ export function renderInscritos() {
           i => `
         <tr data-id="${esc(i.id)}">
           <td>${esc(i.nome)}</td>
-          <td>${esc(i.contato)}</td>
+          <td>${esc(i.tipoContato === 'telefone' ? formatarTelefone(i.contato) : i.contato)}</td>
           <td>${esc(buscar('setores', i.setorId)?.nome ?? '—')}</td>
           <td>${dataBR(i.data)}</td>
           <td class="acoes-linha">

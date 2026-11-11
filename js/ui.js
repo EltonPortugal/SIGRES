@@ -26,7 +26,11 @@ export function toast(mensagem) {
 export function preencherSelectSetores(select, rotuloOpcaoVazia) {
   const atual = select.value;
   const vazia = rotuloOpcaoVazia ? `<option value="">${esc(rotuloOpcaoVazia)}</option>` : '';
-  select.innerHTML = vazia + listar('setores').map(s => `<option value="${esc(s.id)}">${esc(s.nome)}</option>`).join('');
+  select.innerHTML =
+    vazia +
+    listar('setores')
+      .map(s => `<option value="${esc(s.id)}">${esc(s.nome)}</option>`)
+      .join('');
   if ([...select.options].some(o => o.value === atual)) select.value = atual;
 }
 

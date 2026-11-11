@@ -1,7 +1,14 @@
 // Consulta pública do cronograma por bairro ou endereço.
 
 import { TIPOS_RESIDUO, DIAS } from '../config.js';
-import { buscarPorEndereco, coletasDoSetor, proximaColetaDoSetor, descreverData, avisosAtivos, sugestoesDeEndereco } from '../agenda.js';
+import {
+  buscarPorEndereco,
+  coletasDoSetor,
+  proximaColetaDoSetor,
+  descreverData,
+  avisosAtivos,
+  sugestoesDeEndereco
+} from '../agenda.js';
 import { $ } from '../ui.js';
 import { esc } from '../utils.js';
 import { mostrarSetorNoCalendario } from './calendario.js';
@@ -34,7 +41,9 @@ function consultar(texto) {
 }
 
 export function renderConsulta() {
-  $('#listaSugestoes').innerHTML = sugestoesDeEndereco().map(v => `<option value="${esc(v)}">`).join('');
+  $('#listaSugestoes').innerHTML = sugestoesDeEndereco()
+    .map(v => `<option value="${esc(v)}">`)
+    .join('');
   if (termoAtual) renderResultado();
 }
 
@@ -55,11 +64,13 @@ function cartaoSetor({ setor, motivos }) {
   const proxima = proximaColetaDoSetor(setor.id);
   const aviso = avisosAtivos(setor.id).find(a => a.setorId === setor.id);
 
-  const blocoProxima = proxima ? `
+  const blocoProxima = proxima
+    ? `
     <div class="proxima">
       Próxima coleta: <strong>${descreverData(proxima.proxima)}</strong> —
       ${esc(TIPOS_RESIDUO[proxima.coleta.tipo].nome)}, das ${esc(proxima.coleta.inicio)} às ${esc(proxima.coleta.fim)}
-    </div>` : '';
+    </div>`
+    : '';
 
   const listaColetas = coletas.length
     ? coletas.map(itemColeta).join('')

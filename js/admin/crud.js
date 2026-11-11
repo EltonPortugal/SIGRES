@@ -17,7 +17,16 @@ import { esc } from '../utils.js';
  * @param {(item: object, novo: boolean) => string} [opcoes.mensagemSalvo]
  * @param {(id: string) => void} [opcoes.excluir]     Substitui a exclusão padrão.
  */
-export function criarCadastro({ colecao, painel, titulos, lerFormulario, preencherFormulario, colunas, mensagemSalvo, excluir }) {
+export function criarCadastro({
+  colecao,
+  painel,
+  titulos,
+  lerFormulario,
+  preencherFormulario,
+  colunas,
+  mensagemSalvo,
+  excluir
+}) {
   const form = $('form', painel);
   const tbody = $('tbody', painel);
   const titulo = $('[data-titulo]', form);
@@ -50,7 +59,10 @@ export function criarCadastro({ colecao, painel, titulos, lerFormulario, preench
   form.addEventListener('submit', evento => {
     evento.preventDefault();
     const resultado = lerFormulario(form);
-    if (typeof resultado === 'string') { toast(resultado); return; }
+    if (typeof resultado === 'string') {
+      toast(resultado);
+      return;
+    }
     const novo = !form.elements.id.value;
     const item = salvarItem(colecao, { ...resultado, id: form.elements.id.value });
     limpar();
@@ -74,14 +86,18 @@ export function criarCadastro({ colecao, painel, titulos, lerFormulario, preench
     if (form.elements.id.value && !buscar(colecao, form.elements.id.value)) limpar();
     const itens = listar(colecao);
     tbody.innerHTML = itens.length
-      ? itens.map(item => `
+      ? itens
+          .map(
+            item => `
           <tr data-id="${esc(item.id)}">
             ${colunas(item)}
             <td class="acoes-linha">
               <button class="btn sec pequeno" type="button" data-acao="editar">Editar</button>
               <button class="btn perigo pequeno" type="button" data-acao="excluir">Excluir</button>
             </td>
-          </tr>`).join('')
+          </tr>`
+          )
+          .join('')
       : `<tr><td colspan="${totalColunas}" class="vazio">Nenhum registro.</td></tr>`;
   }
 

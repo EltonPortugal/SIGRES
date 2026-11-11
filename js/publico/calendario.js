@@ -55,7 +55,9 @@ export function renderCalendario() {
 
   const tiposUsados = [...new Set(coletas.map(c => c.tipo))];
   $('#calLegenda').innerHTML = tiposUsados.length
-    ? tiposUsados.map(t => `<span style="--cor-tipo:${TIPOS_RESIDUO[t].cor}">${esc(TIPOS_RESIDUO[t].nome)}</span>`).join('')
+    ? tiposUsados
+        .map(t => `<span style="--cor-tipo:${TIPOS_RESIDUO[t].cor}">${esc(TIPOS_RESIDUO[t].nome)}</span>`)
+        .join('')
     : '<span class="vazio">Nenhuma coleta cadastrada para este setor.</span>';
 }
 

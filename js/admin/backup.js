@@ -4,6 +4,7 @@ import { exportarJSON, substituirTudo, restaurarExemplo } from '../store.js';
 import { $, toast, baixarArquivo } from '../ui.js';
 import { hojeISO } from '../utils.js';
 import { registrar } from './auditoria.js';
+import { validarBase } from '../validacao.js';
 
 export function iniciarBackup() {
   $('#btnExportar').addEventListener('click', () => {
@@ -15,12 +16,31 @@ export function iniciarBackup() {
   input.addEventListener('change', async () => {
     const arquivo = input.files[0];
     if (!arquivo) return;
+    let base;
     try {
-      substituirTudo(JSON.parse(await arquivo.text()));
-      registrar('importar', `Arquivo ${arquivo.name}`);
-      toast('Backup importado.');
+      base = JSON.parse(await arquivo.text());
     } catch {
-      toast('Arquivo de backup inválido.');
+      toast('O arquivo selecionado não é um JSON válido.');
+      input.value = '';
+      return;
+    }
+    try {
+      const erros = validarBase(base);
+      if (erros.length) {
+        console.warn('Backup rejeitado:', erros);
+        toast(`Backup inválido: ${erros[0]}${erros.length > 1 ? ` (e mais ${erros.length - 1} problema(s))` : ''}`);
+        return;
+      }
+      const resumo = `${base.setores.length} setor(es), ${base.rotas.length} rota(s), ${base.coletas.length} dia(s) de coleta, ${base.avisos.length} aviso(s) e ${base.inscritos.length} inscrito(s)`;
+      if (
+        !confirm(
+          `Importar ${resumo}?\n\nTodos os dados atuais serão substituídos. Recomenda-se exportar um backup antes.`
+        )
+      )
+        return;
+      substituirTudo(base);
+      registrar('importar', `Arquivo ${arquivo.name}: ${resumo}`);
+      toast('Backup importado.');
     } finally {
       input.value = '';
     }

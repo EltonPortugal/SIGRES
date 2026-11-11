@@ -13,3 +13,9 @@
 .titulo-estatisticas { margin-top: 36px; }
 .estatisticas .card { text-align: center; }
 .num-destaque { font-size: 2rem; font-weight: 800; color: var(--verde); }
+
+/* Páginas institucionais de texto (acessibilidade, privacidade) */
+.texto-institucional { max-width: 860px; }
+.texto-institucional .card { margin-bottom: 16px; }
+.texto-institucional table { margin-top: 12px; }
+kbd { display: inline-block; padding: 0 5px; border: 1px solid var(--borda); border-bottom-width: 2px; border-radius: 4px; font: inherit; font-size: .85em; background: var(--fundo); }

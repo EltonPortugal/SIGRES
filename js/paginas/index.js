@@ -2,6 +2,7 @@
 
 import { iniciar, aoMudar } from '../store.js';
 import { iniciarMenu } from '../menu.js';
+import { iniciarAcessibilidade } from '../acessibilidade.js';
 import { toast, marcarCarregado } from '../ui.js';
 import { iniciarConsulta, renderConsulta } from '../publico/consulta.js';
 import { iniciarCalendario, renderCalendario } from '../publico/calendario.js';
@@ -14,6 +15,7 @@ function renderizar() {
 }
 
 async function main() {
+  iniciarAcessibilidade();
   iniciarMenu();
   await iniciar();
   marcarCarregado();

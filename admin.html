@@ -17,6 +17,20 @@
 <div class="barra-gov">
   <div class="container">
     <span><strong>Prefeitura Municipal de Itapuã do Oeste</strong> · Estado de Rondônia</span>
+    <nav aria-label="Atalhos de acessibilidade">
+      <ul>
+        <li><a href="#conteudo" accesskey="1">Ir para o conteúdo <kbd>1</kbd></a></li>
+        <li><a href="#menuPrincipal" accesskey="2">Ir para o menu <kbd>2</kbd></a></li>
+        <li><a href="#rodape" accesskey="4">Ir para o rodapé <kbd>4</kbd></a></li>
+        <li><a href="acessibilidade.html">Acessibilidade</a></li>
+        <li class="a11y-controles">
+          <button type="button" data-a11y="contraste" aria-pressed="false">Alto contraste</button>
+          <button type="button" data-a11y="diminuir" aria-label="Diminuir o tamanho do texto">A−</button>
+          <button type="button" data-a11y="restaurar" aria-label="Tamanho padrão do texto">A</button>
+          <button type="button" data-a11y="aumentar" aria-label="Aumentar o tamanho do texto">A+</button>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>
 
@@ -42,7 +56,7 @@
   Se esta mensagem não desaparecer, abra o site por um servidor local (veja o arquivo README.md).
 </div>
 
-<main class="bloco">
+<main id="conteudo" class="bloco" tabindex="-1">
   <div class="container">
     <h1>Área administrativa</h1>
     <p class="subtitulo">Cadastro de setores, rotas, dias de coleta e avisos. Uso restrito à equipe gestora.</p>
@@ -70,16 +84,16 @@
         </div>
       </div>
 
-      <div class="abas" role="tablist">
-        <button type="button" role="tab" aria-selected="true" aria-controls="pSetores">Setores</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="pRotas">Rotas</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="pColetas">Dias de coleta</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="pAvisos">Avisos</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="pInscritos">Inscritos</button>
+      <div class="abas" role="tablist" aria-label="Cadastros">
+        <button type="button" role="tab" id="abaSetores" aria-selected="true" aria-controls="pSetores" tabindex="0">Setores</button>
+        <button type="button" role="tab" id="abaRotas" aria-selected="false" aria-controls="pRotas" tabindex="-1">Rotas</button>
+        <button type="button" role="tab" id="abaColetas" aria-selected="false" aria-controls="pColetas" tabindex="-1">Dias de coleta</button>
+        <button type="button" role="tab" id="abaAvisos" aria-selected="false" aria-controls="pAvisos" tabindex="-1">Avisos</button>
+        <button type="button" role="tab" id="abaInscritos" aria-selected="false" aria-controls="pInscritos" tabindex="-1">Inscritos</button>
       </div>
 
       <!-- Setores -->
-      <div class="painel" id="pSetores" role="tabpanel">
+      <div class="painel" id="pSetores" role="tabpanel" aria-labelledby="abaSetores" tabindex="0">
         <div class="grid grid-2 alinhar-topo">
           <form class="card">
             <h3 data-titulo>Novo setor</h3>
@@ -96,7 +110,7 @@
       </div>
 
       <!-- Rotas -->
-      <div class="painel" id="pRotas" role="tabpanel" hidden>
+      <div class="painel" id="pRotas" role="tabpanel" aria-labelledby="abaRotas" tabindex="0" hidden>
         <div class="grid grid-2 alinhar-topo">
           <form class="card">
             <h3 data-titulo>Nova rota</h3>
@@ -115,7 +129,7 @@
       </div>
 
       <!-- Dias de coleta -->
-      <div class="painel" id="pColetas" role="tabpanel" hidden>
+      <div class="painel" id="pColetas" role="tabpanel" aria-labelledby="abaColetas" tabindex="0" hidden>
         <div class="grid grid-2 alinhar-topo">
           <form class="card">
             <h3 data-titulo>Novo dia de coleta</h3>
@@ -140,7 +154,7 @@
       </div>
 
       <!-- Avisos -->
-      <div class="painel" id="pAvisos" role="tabpanel" hidden>
+      <div class="painel" id="pAvisos" role="tabpanel" aria-labelledby="abaAvisos" tabindex="0" hidden>
         <div class="grid grid-2 alinhar-topo">
           <form class="card">
             <h3 data-titulo>Novo aviso</h3>
@@ -162,7 +176,7 @@
       </div>
 
       <!-- Inscritos -->
-      <div class="painel" id="pInscritos" role="tabpanel" hidden>
+      <div class="painel" id="pInscritos" role="tabpanel" aria-labelledby="abaInscritos" tabindex="0" hidden>
         <div class="card">
           <div class="barra-admin">
             <h3>Moradores inscritos para receber avisos</h3>
@@ -176,7 +190,7 @@
   </div>
 </main>
 
-<footer>
+<footer id="rodape">
   <div class="container">
     <div class="rodape-base">
       <span>Prefeitura Municipal de Itapuã do Oeste · Estado de Rondônia</span>

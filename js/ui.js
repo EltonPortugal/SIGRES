@@ -1,6 +1,7 @@
 // Auxiliares de interface compartilhados pelas páginas.
 
 import { listar } from './store.js';
+import { AMBIENTE, VERSAO } from './config.js';
 import { esc } from './utils.js';
 
 export const $ = (seletor, raiz = document) => raiz.querySelector(seletor);
@@ -45,4 +46,19 @@ export function baixarArquivo(nome, conteudo, tipo) {
 /** Remove a mensagem de "servidor local" exibida enquanto os scripts não carregam. */
 export function marcarCarregado() {
   $('[data-aviso-carregamento]')?.remove();
+  $$('[data-versao]').forEach(el => {
+    el.textContent = `v${VERSAO}`;
+  });
+  if (AMBIENTE !== 'producao') exibirFaixaHomologacao();
+}
+
+function exibirFaixaHomologacao() {
+  if ($('.faixa-homologacao')) return;
+  const faixa = document.createElement('div');
+  faixa.className = 'faixa-homologacao';
+  faixa.setAttribute('role', 'note');
+  faixa.innerHTML =
+    '<div class="container"><strong>Ambiente de demonstração.</strong> Setores, ruas e horários exibidos são fictícios ' +
+    'até o cadastro das informações oficiais pela Prefeitura.</div>';
+  $('.topo')?.after(faixa);
 }

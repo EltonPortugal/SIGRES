@@ -1,5 +1,15 @@
 // Constantes compartilhadas por todo o sistema.
 
+/** Versão exibida no rodapé. Atualize a cada release (ver CHANGELOG.md). */
+export const VERSAO = '1.0.0';
+
+/**
+ * Ambiente de execução:
+ * - 'homologacao': exibe a faixa de "ambiente de demonstração" (dados fictícios);
+ * - 'producao': oculta a faixa. Use somente com os dados oficiais cadastrados.
+ */
+export const AMBIENTE = 'homologacao';
+
 export const CHAVE_DADOS = 'coletaItapua.v1';
 export const CHAVE_SESSAO = 'coletaItapua.admin';
 

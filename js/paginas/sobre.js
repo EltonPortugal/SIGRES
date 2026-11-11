@@ -3,6 +3,7 @@
 import { iniciar, aoMudar, listar } from '../store.js';
 import { avisosAtivos } from '../agenda.js';
 import { iniciarMenu } from '../menu.js';
+import { iniciarAcessibilidade } from '../acessibilidade.js';
 import { $, toast, marcarCarregado } from '../ui.js';
 
 function renderEstatisticas() {
@@ -19,6 +20,7 @@ function renderEstatisticas() {
 }
 
 async function main() {
+  iniciarAcessibilidade();
   iniciarMenu();
   await iniciar();
   marcarCarregado();

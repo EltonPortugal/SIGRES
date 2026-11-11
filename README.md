@@ -14,7 +14,7 @@ Funcionalidades:
 O projeto usa **módulos JavaScript (ES Modules)**, que os navegadores não carregam
 quando o arquivo é aberto direto (`file://`). É preciso servir a pasta por HTTP:
 
-- **VS Code:** instale a extensão *Live Server* e clique em **Go Live**; ou
+- **VS Code:** instale a extensão _Live Server_ e clique em **Go Live**; ou
 - **Node.js:** `npx serve .` e acesse o endereço exibido; ou
 - **Python:** `python -m http.server 8000` e acesse <http://localhost:8000>.
 
@@ -49,17 +49,17 @@ img/
 
 ## Modelo de dados
 
-| Coleção     | Campos principais                                                        |
-|-------------|--------------------------------------------------------------------------|
-| `setores`   | `id`, `nome`, `cor`, `bairros[]`                                         |
-| `rotas`     | `id`, `nome`, `setorId`, `logradouros[]`, `veiculo`, `responsavel`       |
-| `coletas`   | `id`, `setorId`, `tipo`, `dias[]` (0 = domingo), `inicio`, `fim`, `obs`  |
+| Coleção     | Campos principais                                                              |
+| ----------- | ------------------------------------------------------------------------------ |
+| `setores`   | `id`, `nome`, `cor`, `bairros[]`                                               |
+| `rotas`     | `id`, `nome`, `setorId`, `logradouros[]`, `veiculo`, `responsavel`             |
+| `coletas`   | `id`, `setorId`, `tipo`, `dias[]` (0 = domingo), `inicio`, `fim`, `obs`        |
 | `avisos`    | `id`, `titulo`, `mensagem`, `setorId` (vazio = todos), `tipo`, `inicio`, `fim` |
-| `inscritos` | `id`, `nome`, `contato`, `setorId`, `data`                               |
+| `inscritos` | `id`, `nome`, `contato`, `setorId`, `data`                                     |
 
 ## Limitações do protótipo
 
-- Os dados ficam **apenas no navegador** de quem usa (localStorage). Use *Exportar/Importar backup* na área administrativa para transferi-los.
+- Os dados ficam **apenas no navegador** de quem usa (localStorage). Use _Exportar/Importar backup_ na área administrativa para transferi-los.
 - O login é **somente demonstrativo** e não oferece segurança real.
 - O envio de avisos é **simulado** (abre o WhatsApp com a mensagem pronta).
 - Os setores, ruas e horários de `data/dados-exemplo.json` são **fictícios**.

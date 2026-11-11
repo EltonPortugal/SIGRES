@@ -34,13 +34,15 @@ function iniciarLogin() {
 
 function iniciarAbas() {
   const abas = $$('.abas [role="tab"]');
-  abas.forEach(aba => aba.addEventListener('click', () => {
-    abas.forEach(outra => {
-      const ativa = outra === aba;
-      outra.setAttribute('aria-selected', String(ativa));
-      $(`#${outra.getAttribute('aria-controls')}`).hidden = !ativa;
-    });
-  }));
+  abas.forEach(aba =>
+    aba.addEventListener('click', () => {
+      abas.forEach(outra => {
+        const ativa = outra === aba;
+        outra.setAttribute('aria-selected', String(ativa));
+        $(`#${outra.getAttribute('aria-controls')}`).hidden = !ativa;
+      });
+    })
+  );
 }
 
 async function main() {

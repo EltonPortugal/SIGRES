@@ -22,7 +22,9 @@ export function iniciarInscritos() {
 export function renderInscritos() {
   const inscritos = listar('inscritos');
   $('#tbInscritos').innerHTML = inscritos.length
-    ? inscritos.map(i => `
+    ? inscritos
+        .map(
+          i => `
         <tr data-id="${esc(i.id)}">
           <td>${esc(i.nome)}</td>
           <td>${esc(i.contato)}</td>
@@ -32,7 +34,9 @@ export function renderInscritos() {
             <button class="btn sec pequeno" type="button" data-acao="mensagem">Enviar WhatsApp</button>
             <button class="btn perigo pequeno" type="button" data-acao="excluir">Excluir</button>
           </td>
-        </tr>`).join('')
+        </tr>`
+        )
+        .join('')
     : '<tr><td colspan="5" class="vazio">Nenhum inscrito até o momento.</td></tr>';
 }
 

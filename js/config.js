@@ -10,9 +10,9 @@ export const DIAS = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'
 export const DIAS_CURTO = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 
 export const TIPOS_RESIDUO = {
-  comum:      { nome: 'Lixo comum / orgânico', cor: '#5d6d64' },
-  reciclavel: { nome: 'Recicláveis',           cor: '#1d5fa8' },
-  volumosos:  { nome: 'Galhos e volumosos',    cor: '#9a6b12' }
+  comum: { nome: 'Lixo comum / orgânico', cor: '#5d6d64' },
+  reciclavel: { nome: 'Recicláveis', cor: '#1d5fa8' },
+  volumosos: { nome: 'Galhos e volumosos', cor: '#9a6b12' }
 };
 
 export const PRIORIDADES = {

@@ -14,7 +14,9 @@ async function carregarExemplo() {
   if (!resposta.ok) throw new Error(`Falha ao carregar os dados de exemplo (HTTP ${resposta.status}).`);
   const exemplo = await resposta.json();
   // Avisos de exemplo sem data são publicados no dia em que os dados são criados.
-  exemplo.avisos.forEach(a => { a.inicio ||= hojeISO(); });
+  exemplo.avisos.forEach(a => {
+    a.inicio ||= hojeISO();
+  });
   return exemplo;
 }
 
@@ -53,7 +55,10 @@ export async function iniciar() {
   window.addEventListener('storage', evento => {
     if (evento.key !== CHAVE_DADOS) return;
     const novos = lerDoNavegador();
-    if (novos) { dados = novos; notificar(); }
+    if (novos) {
+      dados = novos;
+      notificar();
+    }
   });
 }
 

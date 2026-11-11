@@ -28,10 +28,17 @@ export function esc(valor) {
 
 /** Normaliza texto para busca: minúsculas e sem acentos. */
 export function normalizar(texto) {
-  return String(texto ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+  return String(texto ?? '')
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .trim();
 }
 
 /** Quebra um texto em linhas não vazias. */
 export function linhas(texto) {
-  return texto.split('\n').map(l => l.trim()).filter(Boolean);
+  return texto
+    .split('\n')
+    .map(l => l.trim())
+    .filter(Boolean);
 }

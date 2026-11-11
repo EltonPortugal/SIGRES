@@ -70,9 +70,11 @@ function cadastroRotas() {
 function cadastroColetas() {
   const painel = $('#pColetas');
   $('#coletaTipo').innerHTML = Object.entries(TIPOS_RESIDUO)
-    .map(([valor, tipo]) => `<option value="${valor}">${tipo.nome}</option>`).join('');
-  $('#coletaDias').innerHTML = DIAS
-    .map((nome, i) => `<label title="${nome}"><input type="checkbox" name="dias" value="${i}"> ${DIAS_CURTO[i]}</label>`).join('');
+    .map(([valor, tipo]) => `<option value="${valor}">${tipo.nome}</option>`)
+    .join('');
+  $('#coletaDias').innerHTML = DIAS.map(
+    (nome, i) => `<label title="${nome}"><input type="checkbox" name="dias" value="${i}"> ${DIAS_CURTO[i]}</label>`
+  ).join('');
   const checkboxesDias = () => $$('input[name="dias"]', painel);
 
   return criarCadastro({
@@ -80,15 +82,26 @@ function cadastroColetas() {
     painel,
     titulos: { novo: 'Novo dia de coleta', editar: 'Editar dia de coleta' },
     lerFormulario: ({ elements: c }) => {
-      const dias = checkboxesDias().filter(cb => cb.checked).map(cb => Number(cb.value));
+      const dias = checkboxesDias()
+        .filter(cb => cb.checked)
+        .map(cb => Number(cb.value));
       if (!dias.length) return 'Selecione ao menos um dia da semana.';
       if (c.fim.value <= c.inicio.value) return 'O horário final deve ser depois do inicial.';
-      return { setorId: c.setorId.value, tipo: c.tipo.value, dias, inicio: c.inicio.value, fim: c.fim.value, obs: c.obs.value.trim() };
+      return {
+        setorId: c.setorId.value,
+        tipo: c.tipo.value,
+        dias,
+        inicio: c.inicio.value,
+        fim: c.fim.value,
+        obs: c.obs.value.trim()
+      };
     },
     preencherFormulario: ({ elements: c }, coleta) => {
       c.setorId.value = coleta.setorId;
       c.tipo.value = coleta.tipo;
-      checkboxesDias().forEach(cb => { cb.checked = coleta.dias.includes(Number(cb.value)); });
+      checkboxesDias().forEach(cb => {
+        cb.checked = coleta.dias.includes(Number(cb.value));
+      });
       c.inicio.value = coleta.inicio;
       c.fim.value = coleta.fim;
       c.obs.value = coleta.obs ?? '';
@@ -107,7 +120,8 @@ function cadastroColetas() {
 
 function cadastroAvisos() {
   $('#avisoTipo').innerHTML = Object.entries(PRIORIDADES)
-    .map(([valor, rotulo]) => `<option value="${valor}">${rotulo}</option>`).join('');
+    .map(([valor, rotulo]) => `<option value="${valor}">${rotulo}</option>`)
+    .join('');
   $('#avisoInicio').defaultValue = hojeISO(); // restaurado a cada reset() do formulário
 
   return criarCadastro({

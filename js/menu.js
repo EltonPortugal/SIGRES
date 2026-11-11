@@ -16,9 +16,13 @@ export function iniciarMenu() {
 
   const secoes = $$('section.bloco[id]');
   if (!secoes.length) return;
-  const observador = new IntersectionObserver(entradas => entradas.forEach(entrada => {
-    if (!entrada.isIntersecting) return;
-    $$('a', menu).forEach(a => a.classList.toggle('ativo', a.getAttribute('href') === `#${entrada.target.id}`));
-  }), { rootMargin: '-40% 0px -55% 0px' });
+  const observador = new IntersectionObserver(
+    entradas =>
+      entradas.forEach(entrada => {
+        if (!entrada.isIntersecting) return;
+        $$('a', menu).forEach(a => a.classList.toggle('ativo', a.getAttribute('href') === `#${entrada.target.id}`));
+      }),
+    { rootMargin: '-40% 0px -55% 0px' }
+  );
   secoes.forEach(s => observador.observe(s));
 }

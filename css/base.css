@@ -49,6 +49,9 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; }
 .barra-gov a { color: var(--azul); text-decoration: none; }
 .barra-gov a:hover { text-decoration: underline; }
 .barra-gov kbd { display: inline-block; min-width: 1.4em; padding: 0 4px; margin-left: 2px; border: 1px solid var(--borda); border-radius: 3px; font: inherit; font-size: .72rem; text-align: center; background: var(--fundo); color: var(--texto); }
+.a11y-controles { display: flex; gap: 2px; }
+.a11y-controles button { background: none; border: 1px solid transparent; border-radius: 4px; color: var(--azul); font: inherit; padding: 2px 6px; cursor: pointer; }
+.a11y-controles button:hover, .a11y-controles button[aria-pressed="true"] { border-color: var(--azul); }
 main:focus { outline: none; }
 
 /* ---------- Cabeçalho e menu ---------- */
@@ -162,3 +165,18 @@ footer a { color: #fff; }
   html { scroll-behavior: auto; }
   .toast { transition: none; }
 }
+
+/* ---------- Alto contraste (ativado pela barra de acessibilidade) ---------- */
+.alto-contraste {
+  --verde: #ffff00; --verde-escuro: #000; --verde-claro: #000; --azul: #ffff00; --vermelho: #ff6b6b;
+  --texto: #fff; --texto-suave: #fff; --fundo: #000; --card: #000; --borda: #fff; --foco: #00ffff; --sombra: none;
+}
+.alto-contraste body, .alto-contraste .bloco-claro, .alto-contraste .pagina-admin, .alto-contraste .barra-gov,
+.alto-contraste .hero, .alto-contraste input, .alto-contraste select, .alto-contraste textarea,
+.alto-contraste .calendario .dia, .alto-contraste .nota, .alto-contraste .faixa-homologacao, .alto-contraste th {
+  background: #000 !important; color: #fff !important; border-color: #fff !important;
+}
+.alto-contraste a, .alto-contraste .barra-gov a, .alto-contraste .a11y-controles button { color: #ffff00 !important; }
+.alto-contraste .btn { background: #000 !important; color: #ffff00 !important; border: 2px solid #ffff00 !important; }
+.alto-contraste .selo, .alto-contraste .setor-tag { background: #000 !important; color: #fff !important; border: 1px solid #fff; }
+.alto-contraste img { filter: grayscale(1) contrast(1.5); }

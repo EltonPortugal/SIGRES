@@ -2,6 +2,7 @@
 
 import { iniciar, aoMudar } from '../store.js';
 import { iniciarMenu } from '../menu.js';
+import { iniciarAcessibilidade } from '../acessibilidade.js';
 import { $, $$, toast, preencherSelectSetores, marcarCarregado } from '../ui.js';
 import { estaLogado, entrar, sair } from '../admin/auth.js';
 import { iniciarCadastros } from '../admin/cadastros.js';
@@ -46,6 +47,7 @@ function iniciarAbas() {
 }
 
 async function main() {
+  iniciarAcessibilidade();
   iniciarMenu();
   await iniciar();
   marcarCarregado();

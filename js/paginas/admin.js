@@ -33,17 +33,34 @@ function iniciarLogin() {
   });
 }
 
+/** Abas acessíveis (padrão WAI-ARIA): setas, Home e End alternam entre as abas. */
 function iniciarAbas() {
   const abas = $$('.abas [role="tab"]');
-  abas.forEach(aba =>
-    aba.addEventListener('click', () => {
-      abas.forEach(outra => {
-        const ativa = outra === aba;
-        outra.setAttribute('aria-selected', String(ativa));
-        $(`#${outra.getAttribute('aria-controls')}`).hidden = !ativa;
-      });
-    })
-  );
+
+  const selecionar = aba => {
+    abas.forEach(outra => {
+      const ativa = outra === aba;
+      outra.setAttribute('aria-selected', String(ativa));
+      outra.tabIndex = ativa ? 0 : -1;
+      $(`#${outra.getAttribute('aria-controls')}`).hidden = !ativa;
+    });
+    aba.focus();
+  };
+
+  abas.forEach((aba, i) => {
+    aba.addEventListener('click', () => selecionar(aba));
+    aba.addEventListener('keydown', evento => {
+      const destino = {
+        ArrowRight: abas[(i + 1) % abas.length],
+        ArrowLeft: abas[(i - 1 + abas.length) % abas.length],
+        Home: abas[0],
+        End: abas[abas.length - 1]
+      }[evento.key];
+      if (!destino) return;
+      evento.preventDefault();
+      selecionar(destino);
+    });
+  });
 }
 
 async function main() {

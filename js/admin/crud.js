@@ -5,6 +5,10 @@
 import { listar, buscar, salvarItem, removerItem } from '../store.js';
 import { $, toast } from '../ui.js';
 import { esc } from '../utils.js';
+import { registrar } from './auditoria.js';
+
+const ROTULOS = { setores: 'Setor', rotas: 'Rota', coletas: 'Dia de coleta', avisos: 'Aviso' };
+const descricaoPadrao = item => item.nome ?? item.titulo ?? item.id;
 
 /**
  * @param {object} opcoes
@@ -16,6 +20,7 @@ import { esc } from '../utils.js';
  * @param {(item: object) => string} opcoes.colunas   HTML das células da linha (sem a de ações).
  * @param {(item: object, novo: boolean) => string} [opcoes.mensagemSalvo]
  * @param {(id: string) => void} [opcoes.excluir]     Substitui a exclusão padrão.
+ * @param {(item: object) => string} [opcoes.descrever] Identificação do item no histórico de atividades.
  */
 export function criarCadastro({
   colecao,
@@ -25,7 +30,8 @@ export function criarCadastro({
   preencherFormulario,
   colunas,
   mensagemSalvo,
-  excluir
+  excluir,
+  descrever = descricaoPadrao
 }) {
   const form = $('form', painel);
   const tbody = $('tbody', painel);
@@ -51,7 +57,9 @@ export function criarCadastro({
 
   function excluirPadrao(id) {
     if (confirm('Confirmar exclusão?')) {
+      const item = buscar(colecao, id);
       removerItem(colecao, id);
+      registrar('excluir', `${ROTULOS[colecao]}: ${descrever(item)}`);
       toast('Registro excluído.');
     }
   }
@@ -65,6 +73,7 @@ export function criarCadastro({
     }
     const novo = !form.elements.id.value;
     const item = salvarItem(colecao, { ...resultado, id: form.elements.id.value });
+    registrar(novo ? 'criar' : 'editar', `${ROTULOS[colecao]}: ${descrever(item)}`);
     limpar();
     toast(mensagemSalvo?.(item, novo) ?? 'Registro salvo.');
   });

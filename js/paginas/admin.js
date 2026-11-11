@@ -8,6 +8,7 @@ import { estaLogado, entrar, sair, renovarSessao, usuarioLogado } from '../admin
 import { iniciarCadastros } from '../admin/cadastros.js';
 import { iniciarInscritos, renderInscritos } from '../admin/inscritos.js';
 import { iniciarBackup } from '../admin/backup.js';
+import { iniciarAuditoria, renderAuditoria, registrar } from '../admin/auditoria.js';
 
 function atualizarAcesso() {
   const logado = estaLogado();
@@ -29,6 +30,7 @@ function iniciarLogin() {
       const resultado = await entrar(form.elements.usuario.value, form.elements.senha.value);
       if (resultado.ok) {
         form.reset();
+        registrar('login', 'Acesso ao painel de gestão');
         atualizarAcesso();
         toast('Bem-vindo ao painel de gestão.');
       } else {
@@ -44,6 +46,7 @@ function iniciarLogin() {
   });
 
   $('#btnSair').addEventListener('click', () => {
+    registrar('logout', 'Saída pelo botão Sair');
     sair();
     atualizarAcesso();
   });
@@ -100,12 +103,14 @@ async function main() {
   iniciarAbas();
   iniciarBackup();
   iniciarInscritos();
+  iniciarAuditoria();
   const renderCadastros = iniciarCadastros();
 
   const renderizar = () => {
     $$('select[data-select-setores]').forEach(s => preencherSelectSetores(s, s.dataset.selectSetores));
     renderCadastros();
     renderInscritos();
+    renderAuditoria();
   };
   aoMudar(renderizar);
   renderizar();

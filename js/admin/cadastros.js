@@ -5,6 +5,7 @@ import { buscar, listar, removerSetor, vinculosDoSetor } from '../store.js';
 import { $, $$, toast } from '../ui.js';
 import { esc, linhas, dataBR, hojeISO } from '../utils.js';
 import { criarCadastro } from './crud.js';
+import { registrar } from './auditoria.js';
 
 const nomeDoSetor = id => esc(buscar('setores', id)?.nome ?? '—');
 
@@ -33,7 +34,9 @@ function cadastroSetores() {
         ? `Este setor possui ${vinculos} rota(s), dia(s) de coleta ou aviso(s) vinculados. Excluir o setor e todos eles?`
         : 'Confirmar exclusão do setor?';
       if (confirm(pergunta)) {
+        const nome = buscar('setores', id)?.nome;
         removerSetor(id);
+        registrar('excluir', `Setor: ${nome}${vinculos ? ` (e ${vinculos} registro(s) vinculado(s))` : ''}`);
         toast('Setor excluído.');
       }
     }
@@ -114,6 +117,8 @@ function cadastroColetas() {
         <td>${coleta.dias.map(d => DIAS_CURTO[d]).join(', ')}</td>
         <td>${esc(coleta.inicio)}–${esc(coleta.fim)}</td>`;
     },
+    descrever: coleta =>
+      `${buscar('setores', coleta.setorId)?.nome ?? '—'} — ${TIPOS_RESIDUO[coleta.tipo].nome} (${coleta.dias.map(d => DIAS_CURTO[d]).join(', ')})`,
     mensagemSalvo: () => 'Dia de coleta salvo.'
   });
 }
